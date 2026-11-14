@@ -14,7 +14,14 @@ _PRINTF = re.compile(
     r"(?P<flags>[-+#0]*)(?P<width>[0-9]*)(?:\.(?P<precision>[0-9]+))?(?P<kind>[sdif])(?=$|[^A-Za-z0-9_])"
 )
 _UNSUPPORTED_PRINTF = re.compile(r"%(?:\([^)]*\))?(?:[1-9][0-9]*\$)?[-+#0-9.*]*[A-Za-z]")
-_NUMBERS = re.compile(r"[+\-\u2212]?\d+(?:[.,\u066b\u066c]\d+)*")
+# A sign belongs to a number only when it does not directly follow a letter or
+# digit. In "Levels 1-5", "Top-10" and "2026-11-14" the hyphen is a range,
+# compound, or date separator, not a minus sign (bug B5-001).
+_NUMBERS = re.compile(r"(?:(?<![^\W_])[+\-\u2212])?\d+(?:[.,\u066b\u066c]\d+)*")
+# Template placeholders written with double braces, as used by i18next,
+# Handlebars, Mustache, Vue, Angular and Jinja: {{name}}, {{ user.name }}.
+# Longer brace runs such as {{{name}}} are left to the single-brace rules.
+_DOUBLE_BRACE = re.compile(r"(?<!\{)\{\{\s*([A-Za-z_][A-Za-z0-9_.]*)\s*\}\}(?!\})")
 _SCIENTIFIC = re.compile(r"\d(?:[.,]\d+)?[eE][+\-]?\d")
 
 
@@ -40,12 +47,21 @@ def scan_placeholders(text: str) -> PlaceholderScan:
     mistaken for translated quantities. Unsupported brace expressions make
     the comparison unverified rather than silently passing it.
     """
+    tokens: list[str] = []
+
+    def mask_double_brace(match: re.Match[str]) -> str:
+        # {{ name }} and {{name}} are the same placeholder (bug B5-002).
+        tokens.append("{{" + match.group(1) + "}}")
+        return " "
+
+    text = _DOUBLE_BRACE.sub(mask_double_brace, text)
     try:
         parts = list(Formatter().parse(text))
     except ValueError:
-        return PlaceholderScan((), "", unverified=True)
+        # Keep the text so checks that do not depend on placeholder syntax,
+        # such as the copied-text review, can still read its words (bug B5-006).
+        return PlaceholderScan((), text, unverified=True)
 
-    tokens: list[str] = []
     formats: list[tuple[str, str]] = []
     implicit_printf: list[str] = []
     printf_modes: set[str] = set()
