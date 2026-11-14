@@ -2,7 +2,7 @@
 
 A Python command-line tool that compares source and translated text and reports deterministic localization issues.
 
-**Current checkpoint: Block 2 — core validation.** CSV/JSON loading and all six core rule categories are implemented within the documented syntax profiles. Advanced HTML/consistency checks and aggregate reporting remain scheduled for later blocks.
+**Current checkpoint: Block 3 — advanced validation.** CSV/JSON loading, all six core categories, HTML-fragment checks, placeholder consistency, field validation, and cross-record review rules are implemented within the documented profiles. Aggregate reporting remains scheduled for Block 6.
 
 ## Requirements and setup
 
@@ -25,19 +25,20 @@ python -m translation_qa inspect samples/translations.csv
 python -m translation_qa inspect samples/translations.json
 ```
 
-Validate a four-record control fixture that should produce no findings:
+Validate the six-record advanced control fixture in either format:
 
 ```bash
-python -m translation_qa check samples/block2_valid.json
+python -m translation_qa check samples/block3_valid.json
+python -m translation_qa check samples/block3_valid.csv
 ```
 
-Validate the eleven-record issue fixture and save its structured result:
+Validate the seventeen-record advanced issue fixture and save its structured result:
 
 ```bash
-python -m translation_qa check samples/block2_examples.json --output docs/checkpoints/block2-example-output.json
+python -m translation_qa check samples/block3_examples.json --output docs/checkpoints/block3-example-output.json
 ```
 
-**The issue fixture intentionally exits with code `1` because critical findings were detected. That is an expected validation result, not an application crash.** It produces 10 issues: 6 critical, 3 warning, and 1 informational.
+**The issue fixture intentionally exits with code `1` because critical findings were detected. That is an expected validation result, not an application crash.** It produces 15 issues across 11 categories: 10 critical, 3 warning, and 2 informational. The original Block 2 issue fixture still produces 10 findings.
 
 The same rules also accept CSV:
 
@@ -72,7 +73,7 @@ CSV has a header row. JSON accepts a list of records or an object containing a `
 - `id`: non-blank string or integer. Invalid/missing IDs receive a critical finding and a fallback such as `row:1`; `record_index` remains available to locate the input.
 - `source`: non-blank string.
 - `translation`: string. An absent/null value is **missing**; a whitespace-only string is **empty**. Values are never converted to strings to hide a type error.
-- `source_locale`, `target_locale`: optional locale strings used by the limited numeric profiles and same-locale copied-text exception. See [rule definitions](docs/validation-rules.md).
+- `source_locale`, `target_locale`: optional locale strings used by numeric profiles, copied-text exceptions, and cross-record grouping. Omitted/null/blank values mean unspecified; supplied values are checked against a simple locale syntax profile. This is not an IANA locale registry check. See [rule definitions](docs/validation-rules.md).
 
 An empty CSV cell is an empty string. A row ending before the translation cell yields a missing value and a row-width diagnostic. JSON can represent an absent field or explicit `null` directly.
 
@@ -85,9 +86,18 @@ An empty CSV cell is an empty string. A row ending before the translation cell y
 | `missing_placeholder` | Critical | Supported placeholder identities/occurrence counts are missing. |
 | `additional_placeholder` | Critical | Supported placeholder identities/occurrence counts were added. |
 | `numerical_inconsistency` | Warning | Parsed numeric values or occurrence counts differ; intentional changes need review. |
-| `source_copied` | Warning | Source and translation match after NFC normalization and outer-whitespace trimming. |
+| `source_copied` | Warning | Visible source and translation match after Unicode and whitespace normalization. |
+| `html_tag_mismatch` | Critical | A source or target fragment has mismatched, unclosed, or incomplete markup. |
+| `missing_html_tag` / `unexpected_html_tag` | Critical | Tag names or occurrence counts were removed/added. |
+| `html_structure_changed` | Warning | Balanced tag counts match but nesting differs. |
+| `placeholder_format_mismatch` | Warning | Placeholder identities match but format/conversion/width modifiers differ. |
+| `placeholder_order_mismatch` | Critical | Unnumbered printf argument types changed order. |
+| `missing_field` / `invalid_field` / `invalid_record` | Critical | Required schema or input structure is invalid. |
+| `duplicate_record_id` | Critical | Multiple records share the same public identifier. |
+| `duplicate_translation` | Informational | A source/translation pair repeats within the same declared locale group. |
+| `suspicious_translation_reuse` | Warning | Different sources share a translated phrase within a declared locale group. |
 
-Basic `invalid_record` and `invalid_field` guards prevent malformed records from stopping other records. `placeholder_syntax_unverified` and `number_format_unverified` are informational findings: they explicitly report comparisons that could not be completed safely. Critical severity is a configured rule policy, not proof of a game/runtime failure.
+Malformed records do not stop valid neighbors. `placeholder_syntax_unverified`, `number_format_unverified`, and `html_content_unverified` explicitly identify comparisons or content outside the supported profile. Critical severity expresses the tool's preservation/schema policy, not proof of a game/runtime failure. A malformed source fragment is labeled as a source problem; tag changes are not inferred from it.
 
 ## Output structure
 
@@ -103,7 +113,7 @@ Basic `invalid_record` and `invalid_field` guards prevent malformed records from
 }
 ```
 
-The surrounding output includes the engine version, input file/format, analyzed record count, core rule categories, issue count, and issue list. Grouped category/severity statistics are scheduled for Block 6.
+The surrounding output includes the engine version, input file/format, analyzed record count, supported issue categories, issue count, and issue list. Grouped category/severity statistics are scheduled for Block 6.
 
 ## Architecture
 
@@ -114,8 +124,11 @@ translation_qa/
     cli.py            Commands, JSON output, and exit policy
     loading.py        CSV/JSON adapters; raw values preserved
     models.py         Input records, severity, and issue schema
-    tokens.py         Placeholder/number extraction and supported profiles
-    validation.py    Record guards and the shared core rule engine
+    fields.py         Shared field, identifier, and locale helpers
+    tokens.py         Placeholder/number extraction and format signatures
+    markup.py         Raw delimiters, tag stack, and visible-text extraction
+    duplicates.py     Locale-scoped cross-record review checks
+    validation.py     Rule orchestration and deterministic issue ordering
 samples/              Synthetic control and issue fixtures
 tests/                Input, rule, and CLI tests
 docs/checkpoints/     Checkpoint notes and actual execution evidence
@@ -129,21 +142,22 @@ Both file formats use the same validation engine. Rules return issue objects and
 python -m unittest discover -s tests -v
 ```
 
-Current checkpoint: **45 tests, 45 passed, 0 failed** in the preparation environment. Tests use explicit assertions for core rules, supported syntax, value/count preservation, CSV/JSON equivalence, malformed inputs, output structure, and CLI behavior. The suite is being expanded as later requirements are implemented; this is not a measured linguistic-accuracy result.
+Current checkpoint: **101 tests, 101 passed, 0 failed** in the preparation environment. Tests use explicit assertions for core/advanced rules, escaped/malformed HTML, placeholder binding/format consistency, locale-scoped duplicate heuristics, CSV/JSON equivalence, malformed inputs, output structure, and CLI behavior. The suite is being expanded as later requirements are implemented; this is not a measured linguistic-accuracy result.
 
 Python's standard-library `unittest` framework was chosen for automatic assertions, discovery, and reproducible execution without installing a testing dependency.
 
 ## Known limitations
 
 - No semantic/grammar assessment, language identification, native-speaker review, or game execution is performed.
-- HTML/tag validation, cross-record duplicate checks, placeholder format/order consistency, and full optional-field validation are pending Block 3.
-- Placeholder checks compare supported identities and counts. They do not yet validate brace format modifiers or the order of unnumbered printf arguments. ICU plurals, attribute/index expressions, and other dialects require further work.
-- Numeric checks use documented limited profiles. Scientific notation, leading-dot decimals, space-grouped numbers, and unsupported comma/grouping patterns produce review notices. Numbers in dates, ranges, identifiers, HTML attributes, and unit conversions are not understood semantically.
+- HTML uses a strict balanced-fragment profile. It is not a browser, full HTML5 validator, security sanitizer, or rendering test. Optional omitted end tags are not supported; attribute semantics/changes are not generally compared.
+- Placeholder identities, counts, modifier strings, and implicit printf type order are compared. The engine does not evaluate every formatter grammar, infer the meaning of identically typed argument reordering, or implement ICU plurals and all template dialects. Percent-encoded URLs or template-like literal text may require review.
+- Numeric checks use documented limited profiles. Scientific notation, leading-dot decimals, space-grouped numbers, and unsupported comma/grouping patterns produce review notices. Numbers in dates, ranges, identifiers, and unit conversions are not understood semantically. Numeric comparison uses visible text; attribute values are outside its scope.
 - Copied text can be valid for names, brands, or shared words; it is a warning. Zero-width/control-character validation is not yet provided.
 - Loaders read files into memory. Invalid whole-file syntax is rejected; parseable malformed records are reported individually. Duplicate JSON object fields are rejected to avoid silent overwrites.
-- Duplicate record IDs are not yet checked; use `record_index` to disambiguate findings.
+- Cross-record translation checks require a valid declared target locale and compare only matching source/target locale groups. Short labels (fewer than four literal alphabetic characters), numeric-only values, and placeholder-only values are excluded. The heuristic can miss problems or flag valid reuse; findings require context.
+- Record identifiers are compared by their public string representation; integer `1` and string `"1"` collide. The 1-based `record_index` disambiguates each occurrence.
 - Passing a fixture or obtaining no findings does not demonstrate commercial readiness or whole-corpus translation accuracy.
 
 ## Evidence and development transparency
 
-See [Block 1](docs/checkpoints/01-foundation.md), [Block 2](docs/checkpoints/02-core-validation.md), and [rule definitions](docs/validation-rules.md). Samples are synthetic. AI assisted development; results state the environment where they were actually generated. Remote commit references and reviewer access must be verified on GitHub.
+See [Block 1](docs/checkpoints/01-foundation.md), [Block 2](docs/checkpoints/02-core-validation.md), [Block 3](docs/checkpoints/03-advanced-validation.md), and [rule definitions](docs/validation-rules.md). Samples are synthetic. AI assisted development; results state the environment where they were actually generated. Remote commit references and reviewer access must be verified on GitHub.

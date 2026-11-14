@@ -1,0 +1,7 @@
+id,source,translation,source_locale,target_locale
+balanced,<b>Hello</b>,<b>Bonjour</b>,,
+void,Line<br>End,Ligne<br/>Fin,,
+positioned,%1$s has %2$d lives,%2$d vies pour %1$s,,
+attributes,"<span data-count=""2"">3 apples</span>","<span data-count=""99"">3 pommes</span>",,
+entity,Type &lt;b&gt;,Saisir &lt;b&gt;,,
+same-locale,Home,Home,en,en

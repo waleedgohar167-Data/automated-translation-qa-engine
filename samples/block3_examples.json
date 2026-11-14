@@ -1,0 +1,19 @@
+[
+  {"id": "valid-html", "source": "<b>Hello</b>", "translation": "<b>Bonjour</b>"},
+  {"id": "missing-tag", "source": "<b>Save</b>", "translation": "Enregistrer"},
+  {"id": "extra-tag", "source": "Open", "translation": "<i>Ouvrir</i>"},
+  {"id": "bad-nesting", "source": "<b>Close</b>", "translation": "<b>Fermer</i>"},
+  {"id": "format-change", "source": "Total {amount:.2f}", "translation": "Total à payer {amount:.3f}"},
+  {"id": "argument-order", "source": "%s has %d lives", "translation": "%d vies pour %s"},
+  {"source": "Pause game", "translation": "Mettre en pause"},
+  {"id": "invalid-source", "source": 42, "translation": "Élément"},
+  {"id": "invalid-locale", "source": "One item", "translation": "Un objet", "target_locale": []},
+  {"id": "duplicate-id", "source": "Home", "translation": "Accueil", "source_locale": "en", "target_locale": "fr"},
+  {"id": "duplicate-id", "source": "Help", "translation": "Aide", "source_locale": "en", "target_locale": "fr"},
+  {"id": "reuse-start", "source": "Start match", "translation": "Commencer le match", "source_locale": "en", "target_locale": "fr"},
+  {"id": "reuse-end", "source": "End match", "translation": "Commencer le match", "source_locale": "en", "target_locale": "fr"},
+  {"id": "repeated-a", "source": "Settings", "translation": "Paramètres", "source_locale": "en", "target_locale": "fr"},
+  {"id": "repeated-b", "source": "Settings", "translation": "Paramètres", "source_locale": "en", "target_locale": "fr"},
+  42,
+  {"id": "after-malformed", "source": "Good night", "translation": "Bonne nuit"}
+]

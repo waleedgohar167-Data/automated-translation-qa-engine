@@ -11,7 +11,7 @@ import unicodedata
 _FIELD_NAME = re.compile(r"(?:[A-Za-z_][A-Za-z0-9_]*|[0-9]+)\Z")
 _PRINTF = re.compile(
     r"%%|%(?:\((?P<name>[A-Za-z_][A-Za-z0-9_]*)\)|(?P<position>[1-9][0-9]*)\$)?"
-    r"[-+#0]*(?:[0-9]+)?(?:\.[0-9]+)?(?P<kind>[sdif])(?=$|[^A-Za-z0-9_])"
+    r"(?P<flags>[-+#0]*)(?P<width>[0-9]*)(?:\.(?P<precision>[0-9]+))?(?P<kind>[sdif])(?=$|[^A-Za-z0-9_])"
 )
 _UNSUPPORTED_PRINTF = re.compile(r"%(?:\([^)]*\))?(?:[1-9][0-9]*\$)?[-+#0-9.*]*[A-Za-z]")
 _NUMBERS = re.compile(r"[+\-\u2212]?\d+(?:[.,\u066b\u066c]\d+)*")
@@ -23,6 +23,8 @@ class PlaceholderScan:
     tokens: tuple[str, ...]
     literal_text: str
     unverified: bool = False
+    formats: tuple[tuple[str, str], ...] = ()
+    implicit_printf: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -44,6 +46,9 @@ def scan_placeholders(text: str) -> PlaceholderScan:
         return PlaceholderScan((), "", unverified=True)
 
     tokens: list[str] = []
+    formats: list[tuple[str, str]] = []
+    implicit_printf: list[str] = []
+    printf_modes: set[str] = set()
     literals: list[str] = []
     unverified = False
     for literal, field, format_spec, conversion in parts:
@@ -56,24 +61,35 @@ def scan_placeholders(text: str) -> PlaceholderScan:
                 or conversion not in (None, "s", "r", "a")):
             unverified = True
         else:
-            tokens.append("{" + field + "}")
+            token = "{" + field + "}"
+            tokens.append(token)
+            formats.append((token, ("!" + conversion if conversion else "")
+                            + (":" + format_spec if format_spec else "")))
 
     def mask_printf(match: re.Match[str]) -> str:
         if match.group() == "%%":
             return " "
         name, position, kind = match.group("name", "position", "kind")
         if name is not None:
-            tokens.append(f"%({name}){kind}")
+            token = f"%({name}){kind}"
+            printf_modes.add("named")
         elif position is not None:
-            tokens.append(f"%{position}${kind}")
+            token = f"%{position}${kind}"
+            printf_modes.add("positional")
         else:
-            tokens.append(f"%{kind}")
+            token = f"%{kind}"
+            implicit_printf.append(token)
+            printf_modes.add("implicit")
+        tokens.append(token)
+        precision = match.group("precision")
+        formats.append((token, match.group("flags") + match.group("width")
+                        + ("." + precision if precision is not None else "")))
         return " "
 
     literal_text = _PRINTF.sub(mask_printf, "".join(literals))
-    if _UNSUPPORTED_PRINTF.search(literal_text):
+    if _UNSUPPORTED_PRINTF.search(literal_text) or len(printf_modes) > 1:
         unverified = True
-    return PlaceholderScan(tuple(tokens), literal_text, unverified)
+    return PlaceholderScan(tuple(tokens), literal_text, unverified, tuple(formats), tuple(implicit_printf))
 
 
 def _ascii_digits(text: str) -> str:

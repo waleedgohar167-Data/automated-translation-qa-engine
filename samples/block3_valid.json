@@ -1,0 +1,8 @@
+[
+  {"id": "balanced", "source": "<b>Hello</b>", "translation": "<b>Bonjour</b>"},
+  {"id": "void", "source": "Line<br>End", "translation": "Ligne<br/>Fin"},
+  {"id": "positioned", "source": "%1$s has %2$d lives", "translation": "%2$d vies pour %1$s"},
+  {"id": "attributes", "source": "<span data-count=\"2\">3 apples</span>", "translation": "<span data-count=\"99\">3 pommes</span>"},
+  {"id": "entity", "source": "Type &lt;b&gt;", "translation": "Saisir &lt;b&gt;"},
+  {"id": "same-locale", "source": "Home", "translation": "Home", "source_locale": "en", "target_locale": "en"}
+]

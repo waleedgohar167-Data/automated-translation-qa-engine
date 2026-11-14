@@ -51,8 +51,11 @@ class CoreValidationTests(unittest.TestCase):
     def test_placeholder_index_is_not_a_quantity(self):
         self.assertEqual(self.types("Hello {0}", "Bonjour {1}"), {"missing_placeholder", "additional_placeholder"})
 
-    def test_brace_format_precision_is_not_a_quantity(self):
-        self.assertEqual(self.issues("Cost {amount:.2f}: 3", "Coût {amount:.3f} : 3"), [])
+    def test_brace_format_change_is_not_a_numeric_difference(self):
+        # Block 3 adds a formatter-consistency warning. Precision is still not
+        # a translated quantity and must not produce a numerical inconsistency.
+        self.assertEqual(self.types("Cost {amount:.2f}: 3", "Coût {amount:.3f} : 3"),
+                         {"placeholder_format_mismatch"})
 
     def test_printf_named_and_positional_tokens_are_compared(self):
         for token in ("%s", "%d", "%f", "%(name)s", "%1$s", "%03d"):

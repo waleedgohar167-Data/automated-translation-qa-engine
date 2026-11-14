@@ -1,4 +1,4 @@
-"""CLI for input inspection and deterministic core validation."""
+"""CLI for input inspection and deterministic translation validation."""
 
 import argparse
 import json
@@ -7,7 +7,7 @@ import sys
 
 from . import __version__
 from .loading import InputError, load_dataset
-from .validation import CORE_RULES, validate_dataset
+from .validation import ALL_RULES, validate_dataset
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -18,7 +18,7 @@ def main(argv: list[str] | None = None) -> int:
     inspect = commands.add_parser("inspect", help="Load a file and summarize its records.")
     inspect.add_argument("input", help="Input CSV or JSON file")
     inspect.add_argument("--format", choices=("auto", "csv", "json"), default="auto")
-    check = commands.add_parser("check", help="Run core validation and emit structured issues.")
+    check = commands.add_parser("check", help="Run translation validation and emit structured issues.")
     check.add_argument("input", help="Input CSV or JSON file")
     check.add_argument("--format", choices=("auto", "csv", "json"), default="auto")
     check.add_argument("--output", type=Path, help="Also save the JSON result to this file")
@@ -45,12 +45,12 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     issues = validate_dataset(dataset)
     output = {
-        "mode": "core_validation",
+        "mode": "translation_validation",
         "engine_version": __version__,
         "input_file": dataset.filename,
         "input_format": dataset.input_format,
         "records_analyzed": len(dataset.records),
-        "rules": list(CORE_RULES),
+        "rules": list(ALL_RULES),
         "issue_count": len(issues),
         "issues": [issue.to_dict() for issue in issues],
     }

@@ -64,6 +64,8 @@ def load_dataset(path: str | Path, input_format: str = "auto") -> LoadedDataset:
     try:
         with source.open("r", encoding="utf-8-sig", newline="") as handle:
             records = _csv_records(handle) if kind == "csv" else _json_records(handle)
-    except (OSError, UnicodeError, csv.Error, json.JSONDecodeError, RecursionError) as exc:
+    except InputError:
+        raise
+    except (OSError, UnicodeError, csv.Error, ValueError, RecursionError) as exc:
         raise InputError(f"Cannot load {source.name}: {exc}") from exc
     return LoadedDataset(records=records, input_format=kind, filename=source.name)

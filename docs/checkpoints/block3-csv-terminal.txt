@@ -1,0 +1,36 @@
+Executed: 2026-11-14T12:46:10.482394+05:00
+Command: python -m translation_qa check samples/block3_valid.csv
+Exit code: 0 (expected 0)
+
+{
+  "mode": "translation_validation",
+  "engine_version": "0.3.0",
+  "input_file": "block3_valid.csv",
+  "input_format": "csv",
+  "records_analyzed": 6,
+  "rules": [
+    "empty_translation",
+    "missing_translation",
+    "missing_placeholder",
+    "additional_placeholder",
+    "numerical_inconsistency",
+    "source_copied",
+    "html_tag_mismatch",
+    "missing_html_tag",
+    "unexpected_html_tag",
+    "html_structure_changed",
+    "html_content_unverified",
+    "placeholder_format_mismatch",
+    "placeholder_order_mismatch",
+    "invalid_record",
+    "missing_field",
+    "invalid_field",
+    "duplicate_record_id",
+    "duplicate_translation",
+    "suspicious_translation_reuse",
+    "placeholder_syntax_unverified",
+    "number_format_unverified"
+  ],
+  "issue_count": 0,
+  "issues": []
+}
