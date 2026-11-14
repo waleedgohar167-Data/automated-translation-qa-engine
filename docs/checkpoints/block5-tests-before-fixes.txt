@@ -1,0 +1,242 @@
+test_copied_text_with_unbalanced_brace_is_still_flagged (test_regressions.CopiedTextReviewTests.test_copied_text_with_unbalanced_brace_is_still_flagged) ... FAIL
+test_translated_text_with_unbalanced_brace_is_not_called_copied (test_regressions.CopiedTextReviewTests.test_translated_text_with_unbalanced_brace_is_not_called_copied) ... ok
+test_cell_values_are_still_not_trimmed (test_regressions.CsvHeaderTests.test_cell_values_are_still_not_trimmed) ... ok
+test_documented_field_names_are_accepted_in_any_letter_case (test_regressions.CsvHeaderTests.test_documented_field_names_are_accepted_in_any_letter_case) ... FAIL
+test_headers_that_collide_after_cleaning_are_rejected (test_regressions.CsvHeaderTests.test_headers_that_collide_after_cleaning_are_rejected) ... FAIL
+test_spaces_around_header_names_are_ignored (test_regressions.CsvHeaderTests.test_spaces_around_header_names_are_ignored) ... FAIL
+test_added_double_brace_placeholder_is_additional (test_regressions.DoubleBracePlaceholderTests.test_added_double_brace_placeholder_is_additional) ... FAIL
+test_digits_inside_a_double_brace_name_are_not_quantities (test_regressions.DoubleBracePlaceholderTests.test_digits_inside_a_double_brace_name_are_not_quantities) ... FAIL
+test_dropped_double_brace_placeholder_is_missing (test_regressions.DoubleBracePlaceholderTests.test_dropped_double_brace_placeholder_is_missing) ... FAIL
+test_inner_spacing_and_order_may_change (test_regressions.DoubleBracePlaceholderTests.test_inner_spacing_and_order_may_change) ... ok
+test_other_doubled_braces_remain_escaped_literals (test_regressions.DoubleBracePlaceholderTests.test_other_doubled_braces_remain_escaped_literals) ... ok
+test_renamed_double_brace_placeholder_is_missing_and_additional (test_regressions.DoubleBracePlaceholderTests.test_renamed_double_brace_placeholder_is_missing_and_additional) ... FAIL
+test_changed_range_endpoint_is_still_reported (test_regressions.NumberSignTests.test_changed_range_endpoint_is_still_reported) ... ok
+test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) ... 
+  test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) (source='Levels 1-5') ... FAIL
+  test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) (source='Pages 10-20') ... FAIL
+  test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) (source='Top-10 players') ... FAIL
+test_scan_reads_range_endpoints_as_positive_values (test_regressions.NumberSignTests.test_scan_reads_range_endpoints_as_positive_values) ... FAIL
+test_standalone_signs_are_still_negative_numbers (test_regressions.NumberSignTests.test_standalone_signs_are_still_negative_numbers) ... ok
+test_existing_unrelated_report_file_can_still_be_replaced (test_regressions.OutputAliasTests.test_existing_unrelated_report_file_can_still_be_replaced) ... ok
+test_hard_link_alias_is_rejected_before_writing (test_regressions.OutputAliasTests.test_hard_link_alias_is_rejected_before_writing) ... FAIL
+test_error_output_is_ascii_json_for_any_file_name (test_regressions.OutputEncodingTests.test_error_output_is_ascii_json_for_any_file_name) ... FAIL
+test_lone_surrogate_in_input_does_not_block_the_saved_report (test_regressions.OutputEncodingTests.test_lone_surrogate_in_input_does_not_block_the_saved_report) ... FAIL
+test_unexpected_rule_error_becomes_a_finding_for_that_record_only (test_regressions.RecordFailureIsolationTests.test_unexpected_rule_error_becomes_a_finding_for_that_record_only) ... ERROR
+test_validation_error_is_in_the_published_rule_catalog (test_regressions.RecordFailureIsolationTests.test_validation_error_is_in_the_published_rule_catalog) ... FAIL
+
+======================================================================
+ERROR: test_unexpected_rule_error_becomes_a_finding_for_that_record_only (test_regressions.RecordFailureIsolationTests.test_unexpected_rule_error_becomes_a_finding_for_that_record_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 235, in test_unexpected_rule_error_becomes_a_finding_for_that_record_only
+    issues = validate_dataset(dataset)
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/translation_qa/validation.py", line 125, in validate_dataset
+    issues = [issue for record in dataset.records for issue in validate_record(record)]
+                                                               ~~~~~~~~~~~~~~~^^^^^^^^
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/translation_qa/validation.py", line 66, in validate_record
+    source_markup, target_markup = scan_markup(source), scan_markup(translation)
+                                   ~~~~~~~~~~~^^^^^^^^
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 227, in failing_scan
+    raise RuntimeError("simulated rule failure")
+RuntimeError: simulated rule failure
+
+======================================================================
+FAIL: test_copied_text_with_unbalanced_brace_is_still_flagged (test_regressions.CopiedTextReviewTests.test_copied_text_with_unbalanced_brace_is_still_flagged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 180, in test_copied_text_with_unbalanced_brace_is_still_flagged
+    self.assertEqual(issue_types("Press } to continue", "Press } to continue"),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     {"placeholder_syntax_unverified", "source_copied"})
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'source_copied'
+
+======================================================================
+FAIL: test_documented_field_names_are_accepted_in_any_letter_case (test_regressions.CsvHeaderTests.test_documented_field_names_are_accepted_in_any_letter_case)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 204, in test_documented_field_names_are_accepted_in_any_letter_case
+    self.assertEqual(list(dataset.records[0].data),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     ["id", "source", "translation", "target_locale", "Notes"])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['ID', 'Source', 'TRANSLATION', 'Target_Locale', 'Notes'] != ['id', 'source', 'translation', 'target_locale', 'Notes']
+
+First differing element 0:
+'ID'
+'id'
+
+- ['ID', 'Source', 'TRANSLATION', 'Target_Locale', 'Notes']
++ ['id', 'source', 'translation', 'target_locale', 'Notes']
+
+======================================================================
+FAIL: test_headers_that_collide_after_cleaning_are_rejected (test_regressions.CsvHeaderTests.test_headers_that_collide_after_cleaning_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 209, in test_headers_that_collide_after_cleaning_are_rejected
+    with self.assertRaisesRegex(InputError, "unique"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: InputError not raised
+
+======================================================================
+FAIL: test_spaces_around_header_names_are_ignored (test_regressions.CsvHeaderTests.test_spaces_around_header_names_are_ignored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 199, in test_spaces_around_header_names_are_ignored
+    self.assertEqual(dataset.records[0].data, {"id": "1", "source": "Hello", "translation": "Bonjour"})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'id': '1', ' source ': 'Hello', ' translation': 'Bonjour'} != {'id': '1', 'source': 'Hello', 'translation': 'Bonjour'}
+- {' source ': 'Hello', ' translation': 'Bonjour', 'id': '1'}
+?   ^      -             -                       -----------
+
++ {'id': '1', 'source': 'Hello', 'translation': 'Bonjour'}
+?   ^^^^^^^^^^^
+
+
+======================================================================
+FAIL: test_added_double_brace_placeholder_is_additional (test_regressions.DoubleBracePlaceholderTests.test_added_double_brace_placeholder_is_additional)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 157, in test_added_double_brace_placeholder_is_additional
+    self.assertEqual(issue_types("Welcome back", "Bon retour {{name}}"), {"additional_placeholder"})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'additional_placeholder'
+
+======================================================================
+FAIL: test_digits_inside_a_double_brace_name_are_not_quantities (test_regressions.DoubleBracePlaceholderTests.test_digits_inside_a_double_brace_name_are_not_quantities)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 166, in test_digits_inside_a_double_brace_name_are_not_quantities
+    self.assertEqual(issue_types("Step {{step2}}", "Étape {{step3}}"),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     {"missing_placeholder", "additional_placeholder"})
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'numerical_inconsistency'
+Items in the second set but not the first:
+'missing_placeholder'
+'additional_placeholder'
+
+======================================================================
+FAIL: test_dropped_double_brace_placeholder_is_missing (test_regressions.DoubleBracePlaceholderTests.test_dropped_double_brace_placeholder_is_missing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 148, in test_dropped_double_brace_placeholder_is_missing
+    self.assertEqual([(i.issue_type, i.severity.value) for i in issues],
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     [("missing_placeholder", "critical")])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [('missing_placeholder', 'critical')]
+
+Second list contains 1 additional elements.
+First extra element 0:
+('missing_placeholder', 'critical')
+
+- []
++ [('missing_placeholder', 'critical')]
+
+======================================================================
+FAIL: test_renamed_double_brace_placeholder_is_missing_and_additional (test_regressions.DoubleBracePlaceholderTests.test_renamed_double_brace_placeholder_is_missing_and_additional)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 153, in test_renamed_double_brace_placeholder_is_missing_and_additional
+    self.assertEqual(issue_types("Hello {{ name }}!", "Bonjour {{nom}} !"),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     {"missing_placeholder", "additional_placeholder"})
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'missing_placeholder'
+'additional_placeholder'
+
+======================================================================
+FAIL: test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) (source='Levels 1-5')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 119, in test_ranges_compounds_and_dates_are_not_negative_numbers
+    self.assertEqual(issue_types(source, translation), set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'numerical_inconsistency'
+
+======================================================================
+FAIL: test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) (source='Pages 10-20')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 119, in test_ranges_compounds_and_dates_are_not_negative_numbers
+    self.assertEqual(issue_types(source, translation), set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'numerical_inconsistency'
+
+======================================================================
+FAIL: test_ranges_compounds_and_dates_are_not_negative_numbers (test_regressions.NumberSignTests.test_ranges_compounds_and_dates_are_not_negative_numbers) (source='Top-10 players')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 119, in test_ranges_compounds_and_dates_are_not_negative_numbers
+    self.assertEqual(issue_types(source, translation), set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'numerical_inconsistency'
+
+======================================================================
+FAIL: test_scan_reads_range_endpoints_as_positive_values (test_regressions.NumberSignTests.test_scan_reads_range_endpoints_as_positive_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 122, in test_scan_reads_range_endpoints_as_positive_values
+    self.assertEqual(scan_numbers("Levels 1-5").values, (Decimal(1), Decimal(5)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (Decimal('1'), Decimal('-5')) != (Decimal('1'), Decimal('5'))
+
+First differing element 1:
+Decimal('-5')
+Decimal('5')
+
+- (Decimal('1'), Decimal('-5'))
+?                         -
+
++ (Decimal('1'), Decimal('5'))
+
+======================================================================
+FAIL: test_hard_link_alias_is_rejected_before_writing (test_regressions.OutputAliasTests.test_hard_link_alias_is_rejected_before_writing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 66, in test_hard_link_alias_is_rejected_before_writing
+    self.assertEqual(source.read_bytes(), original)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'{\n  "mode": "translation_validation",\n [781 chars]n}\n' != b'[{"id": "one", "source": "Hello", "transl[15 chars]r"}]'
+
+======================================================================
+FAIL: test_error_output_is_ascii_json_for_any_file_name (test_regressions.OutputEncodingTests.test_error_output_is_ascii_json_for_any_file_name)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 101, in test_error_output_is_ascii_json_for_any_file_name
+    self.assertTrue(stderr.isascii(), "Error output must survive any console encoding.")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Error output must survive any console encoding.
+
+======================================================================
+FAIL: test_lone_surrogate_in_input_does_not_block_the_saved_report (test_regressions.OutputEncodingTests.test_lone_surrogate_in_input_does_not_block_the_saved_report)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 90, in test_lone_surrogate_in_input_does_not_block_the_saved_report
+    self.assertEqual(stderr, "")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: '{"error": "output_error", "message": "\'u[90 chars]"}\n' != ''
+- {"error": "output_error", "message": "'utf-8' codec can't encode character '\\ud83d' in position 817: surrogates not allowed"}
+
+
+======================================================================
+FAIL: test_validation_error_is_in_the_published_rule_catalog (test_regressions.RecordFailureIsolationTests.test_validation_error_is_in_the_published_rule_catalog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/claude/waleedgohar167-data/automated-translation-qa-engine/tests/test_regressions.py", line 241, in test_validation_error_is_in_the_published_rule_catalog
+    self.assertIn("validation_error", ALL_RULES)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'validation_error' not found in ('empty_translation', 'missing_translation', 'missing_placeholder', 'additional_placeholder', 'numerical_inconsistency', 'source_copied', 'html_tag_mismatch', 'missing_html_tag', 'unexpected_html_tag', 'html_structure_changed', 'html_content_unverified', 'placeholder_format_mismatch', 'placeholder_order_mismatch', 'invalid_record', 'missing_field', 'invalid_field', 'duplicate_record_id', 'duplicate_translation', 'suspicious_translation_reuse', 'placeholder_syntax_unverified', 'number_format_unverified')
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.015s
+
+FAILED (failures=16, errors=1)
