@@ -2,7 +2,7 @@
 
 A Python command-line tool that compares source and translated text and reports deterministic localization issues.
 
-**Current checkpoint: Block 4 — automated testing.** CSV/JSON loading, all six core categories, HTML-fragment checks, placeholder consistency, field validation, and cross-record review rules are implemented within the documented profiles. The expanded suite has 139 tests; 138 passed and one exposed an input-overwrite bug involving hard links. That regression remains open for Block 5. Aggregate reporting remains scheduled for Block 6.
+**Current checkpoint: Block 5 — debugging.** CSV/JSON loading, all six core categories, HTML-fragment checks, placeholder consistency, field validation, and cross-record review rules are implemented within the documented profiles. The suite has 161 tests and all of them pass. The hard-link overwrite bug found in Block 4 and six further defects are fixed; see the [Block 5 checkpoint](docs/checkpoints/05-debugging.md). Aggregate reporting remains scheduled for Block 6.
 
 ## Requirements and setup
 
@@ -58,7 +58,7 @@ python -m translation_qa check samples/translations.csv
 
 ## Input structure
 
-CSV has a header row. JSON accepts a list of records or an object containing a `records` list. Files use UTF-8, with an optional UTF-8 byte-order mark.
+CSV has a header row; header labels are trimmed and the documented field names are accepted in any letter case. JSON accepts a list of records or an object containing a `records` list. Files use UTF-8, with an optional UTF-8 byte-order mark.
 
 ```json
 {
@@ -97,7 +97,7 @@ An empty CSV cell is an empty string. A row ending before the translation cell y
 | `duplicate_translation` | Informational | A source/translation pair repeats within the same declared locale group. |
 | `suspicious_translation_reuse` | Warning | Different sources share a translated phrase within a declared locale group. |
 
-Malformed records do not stop valid neighbors. `placeholder_syntax_unverified`, `number_format_unverified`, and `html_content_unverified` explicitly identify comparisons or content outside the supported profile. Critical severity expresses the tool's preservation/schema policy, not proof of a game/runtime failure. A malformed source fragment is labeled as a source problem; tag changes are not inferred from it.
+Malformed records do not stop valid neighbors. If a rule fails unexpectedly on one record, that record receives a critical `validation_error` finding and the remaining records are still checked. `placeholder_syntax_unverified`, `number_format_unverified`, and `html_content_unverified` explicitly identify comparisons or content outside the supported profile. Critical severity expresses the tool's preservation/schema policy, not proof of a game/runtime failure. A malformed source fragment is labeled as a source problem; tag changes are not inferred from it.
 
 ## Output structure
 
@@ -142,13 +142,13 @@ Both file formats use the same validation engine. Rules return issue objects and
 python -m unittest discover -s tests -v
 ```
 
-Current checkpoint: **139 tests: 138 passed, 1 failed, 0 errors, 0 skipped** in the Linux preparation environment. The 101 existing tests remain unchanged; 38 new tests cover file boundaries, real command-line subprocesses, output safety, and pipeline contracts. Counts are discovered test methods; additional `subTest` examples are not counted separately.
+Current checkpoint: **161 tests: 161 passed, 0 failed, 0 errors, 0 skipped** in the Linux preparation environment. The 139 Block 4 tests are unchanged; 22 tests in `tests/test_regressions.py` cover the defects fixed in Block 5. Counts are discovered test methods; additional `subTest` examples are not counted separately. The same suite also runs under `python -m pytest` when pytest is installed.
 
-The failing test, `test_hardlink_output_cannot_overwrite_input`, exposes **B4-001**: a report path that is a hard link to the input can overwrite that input. The test uses disposable files only and asserts the intended safe behavior. It remains an ordinary failing test for the Block 5 fix. Do not treat this checkpoint as a fully passing release. Until fixed, write reports to a new, separate filename.
+The Block 4 failing test, `test_hardlink_output_cannot_overwrite_input`, now passes without having been modified. Bug **B4-001** (a report path that is a hard link to the input could overwrite that input) is fixed by comparing file identity before anything is written.
 
 On Windows, symbolic-link tests may be skipped when the account cannot create them. Hard-link tests skip only if the filesystem cannot create a hard link. Record actual local results and any skips; the Linux result above is not a claim about another machine.
 
-See the [requirements-to-tests map](docs/testing.md), [Block 4 checkpoint](docs/checkpoints/04-automated-testing.md), [test summary](docs/checkpoints/block4-test-summary.json), and [original terminal output](docs/checkpoints/block4-test-output.txt). Tests verify explicit expectations for core/advanced rules, file formats, malformed inputs, CLI exits, serialized findings, non-mutation, and deterministic results. No line/branch coverage percentage or linguistic-accuracy metric has been measured.
+See the [requirements-to-tests map](docs/testing.md), [Block 5 checkpoint](docs/checkpoints/05-debugging.md), [test summary](docs/checkpoints/block5-test-summary.json), and [terminal output](docs/checkpoints/block5-test-output.txt). Tests verify explicit expectations for core/advanced rules, file formats, malformed inputs, CLI exits, serialized findings, non-mutation, and deterministic results. No line/branch coverage percentage or linguistic-accuracy metric has been measured.
 
 Python's standard-library `unittest` framework was chosen for automatic assertions, discovery, and reproducible execution without installing a testing dependency.
 
@@ -160,11 +160,12 @@ Python's standard-library `unittest` framework was chosen for automatic assertio
 - Numeric checks use documented limited profiles. Scientific notation, leading-dot decimals, space-grouped numbers, and unsupported comma/grouping patterns produce review notices. Numbers in dates, ranges, identifiers, and unit conversions are not understood semantically. Numeric comparison uses visible text; attribute values are outside its scope.
 - Copied text can be valid for names, brands, or shared words; it is a warning. Zero-width/control-character validation is not yet provided.
 - Loaders read files into memory. Invalid whole-file syntax is rejected; parseable malformed records are reported individually. Duplicate JSON object fields are rejected to avoid silent overwrites.
-- **Open bug B4-001:** resolved-path checks do not detect hard-link aliases. Using an existing hard link to the input as the report destination can overwrite the input. Use a new, separate output filename pending the Block 5 fix.
+- A hyphen directly after a letter or digit is read as a separator, so `1-5` and `Top-10` are not negative numbers. The trade-off is that `UTC-5` is read as 5.
+- Double-brace placeholders are recognized for simple names and dotted paths such as `{{name}}` and `{{ user.name }}`. Block helpers and filters remain literal text.
 - Cross-record translation checks require a valid declared target locale and compare only matching source/target locale groups. Short labels (fewer than four literal alphabetic characters), numeric-only values, and placeholder-only values are excluded. The heuristic can miss problems or flag valid reuse; findings require context.
 - Record identifiers are compared by their public string representation; integer `1` and string `"1"` collide. The 1-based `record_index` disambiguates each occurrence.
 - Passing a fixture or obtaining no findings does not demonstrate commercial readiness or whole-corpus translation accuracy.
 
 ## Evidence and development transparency
 
-See [Block 1](docs/checkpoints/01-foundation.md), [Block 2](docs/checkpoints/02-core-validation.md), [Block 3](docs/checkpoints/03-advanced-validation.md), [Block 4](docs/checkpoints/04-automated-testing.md), and [rule definitions](docs/validation-rules.md). Samples are synthetic. AI assisted development; results state the environment where they were actually generated. Remote commit references and reviewer access must be verified on GitHub.
+See [Block 1](docs/checkpoints/01-foundation.md), [Block 2](docs/checkpoints/02-core-validation.md), [Block 3](docs/checkpoints/03-advanced-validation.md), [Block 4](docs/checkpoints/04-automated-testing.md), [Block 5](docs/checkpoints/05-debugging.md), and [rule definitions](docs/validation-rules.md). Samples are synthetic. AI assisted development; results state the environment where they were actually generated. Remote commit references and reviewer access must be verified on GitHub.

@@ -1,4 +1,4 @@
-# Validation rule contracts — Blocks 2 and 3
+# Validation rule contracts — Blocks 2, 3 and 5
 
 The engine reports violations of a defined deterministic profile. It does not infer translation quality, blame an AI model, or repair text automatically.
 
@@ -11,11 +11,11 @@ The engine reports violations of a defined deterministic profile. It does not in
 5. Independently flag directly copied visible words as a review warning where applicable.
 6. Check duplicate IDs and eligible reused translations across records; preserve record_index and deterministic record order.
 
-Missing id/source fields use `missing_field`; invalid values use `invalid_field`. Missing/null translation keeps its dedicated `missing_translation` category. Omitted/null/blank locale values are unspecified. Other locale values must match the documented simple syntax; malformed values are reported and numeric comparisons are skipped. Extra application metadata fields are permitted and ignored.
+Missing id/source fields use `missing_field`; invalid values use `invalid_field`. Missing/null translation keeps its dedicated `missing_translation` category. Omitted/null/blank locale values are unspecified. Other locale values must match the documented simple syntax; malformed values are reported and numeric comparisons are skipped. Extra application metadata fields are permitted and ignored. CSV header labels are trimmed, and the five documented field names are accepted in any letter case; cell values and JSON keys are used exactly as given. If a rule fails unexpectedly on one record, that record receives a critical `validation_error` and the other records are still validated.
 
 ## Placeholders
 
-Supported brace identities: `{name}`, `{player_name}`, and numeric fields such as `{0}`. `{{` and `}}` are escaped literal braces. A simple field with a non-nested modifier, such as `{amount:.2f}`, contributes its identity `{amount}`; the modifier is compared as a signature, without executing or certifying its formatter semantics.
+Supported brace identities: `{name}`, `{player_name}`, and numeric fields such as `{0}`. A double-brace template placeholder holding a simple name or dotted path, such as `{{name}}` or `{{ user.name }}`, is the identity `{{name}}` and must be preserved; spacing inside the braces is ignored. Any other `{{` and `}}` are escaped literal braces. A simple field with a non-nested modifier, such as `{amount:.2f}`, contributes its identity `{amount}`; the modifier is compared as a signature, without executing or certifying its formatter semantics.
 
 Supported printf conversions: `%s`, `%d`, `%i`, `%f`, named forms such as `%(name)s`, and explicit positions such as `%1$s`. Simple width/precision flags can be consumed, such as `%03d` and `%.2f`. An argument must end before whitespace, punctuation, another placeholder, or end-of-text. `%%` is a literal percent escape. Adjacent alphanumeric suffixes and unrecognized conversions such as `%x` require review.
 
@@ -27,7 +27,7 @@ These conventions are a limited declared profile. They are not a complete implem
 
 ## Numbers
 
-After supported markup is parsed and placeholders in visible text are masked, compare multisets of numeric values using `Decimal`, not binary floating point. Attribute values and comments are excluded. Malformed/unverified markup or invalid locale fields prevent numeric guesses. Unicode decimal digits are normalized to ASCII. Signs and occurrence counts are preserved, while order and insignificant trailing decimal zeros may differ.
+After supported markup is parsed and placeholders in visible text are masked, compare multisets of numeric values using `Decimal`, not binary floating point. Attribute values and comments are excluded. Malformed/unverified markup or invalid locale fields prevent numeric guesses. Unicode decimal digits are normalized to ASCII. Signs and occurrence counts are preserved, while order and insignificant trailing decimal zeros may differ. A `+`, `-`, or `−` is a sign only when it does not directly follow a letter or digit: in `1-5`, `Top-10`, and `2026-11-14` the hyphen is a separator.
 
 | Declared numeric profile | Decimal separator | Group separator |
 | --- | --- | --- |

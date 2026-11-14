@@ -1,10 +1,10 @@
-# Automated test plan — Block 4
+# Automated test plan — Blocks 4 and 5
 
 ## Purpose and approach
 
 Check the declared behavior using explicit expected results. Exercise both the reusable validation functions and the real `python -m translation_qa` process. Temporary files isolate input/output tests. No model access, network calls, third-party test packages, or real client data are needed.
 
-The engine already had 101 tests at Block 3. Block 4 adds 38 tests for meaningful gaps; it does not count `subTest` examples as extra test methods, change earlier expectations, or add assertions just to increase the total. Python's standard-library `unittest` meets the assignment's automated-testing requirement without changing frameworks.
+The engine already had 101 tests at Block 3. Block 5 adds 22 regression tests for the defects it fixed. Block 4 adds 38 tests for meaningful gaps; it does not count `subTest` examples as extra test methods, change earlier expectations, or add assertions just to increase the total. Python's standard-library `unittest` meets the assignment's automated-testing requirement without changing frameworks.
 
 ## Run the complete suite
 
@@ -17,11 +17,11 @@ python -m unittest discover -s tests -v
 Save your actual Windows terminal evidence with PowerShell:
 
 ```powershell
-python -m unittest discover -s tests -v 2>&1 | Tee-Object -FilePath docs/checkpoints/block4-local-test-output.txt
+python -m unittest discover -s tests -v 2>&1 | Tee-Object -FilePath docs/checkpoints/block5-local-test-output.txt
 $LASTEXITCODE
 ```
 
-This Block 4 checkpoint has one known failing regression, B4-001; a test exit code of 1 is therefore a real test failure, not the expected issue-detection exit of an application fixture. Keep those two meanings separate. Do not mark the regression as an expected failure or remove it to obtain a green run.
+Block 4 ended with one known failing regression, B4-001. Block 5 fixed the defect without changing that test, so the whole suite is expected to pass. A test exit code of 1 is a real test failure, not the expected issue-detection exit of an application fixture. Keep those two meanings separate.
 
 To isolate the discovered bug safely:
 
@@ -43,7 +43,8 @@ All file-alias tests create their own temporary input and output files. If the e
 | `test_input_boundaries.py` | 17 | New real-file encoding, syntax, schema-container, and path tests |
 | `test_cli_integration.py` | 13 | New subprocess command, exit policy, output, and file-alias tests |
 | `test_pipeline_contracts.py` | 8 | New combined-rule, non-mutation, ordering, and serialization tests |
-| **Total** | **139** | Discovered test methods |
+| `test_regressions.py` | 22 | Block 5 regression and guard tests for B4-001 and B5-001 to B5-006, plus record-failure isolation |
+| **Total** | **161** | Discovered test methods |
 
 ## Assignment requirements mapped to assertions
 
@@ -76,6 +77,6 @@ Names below are actual test methods. This is a behavioral coverage map, not a me
 
 ## Results and limits
 
-The preparation run recorded **139 tests, 138 passed, 1 failed, 0 errors, 0 skipped**. See `checkpoints/block4-test-output.txt` for the original run and `checkpoints/block4-test-summary.json` for environment/count details. The failure is documented as B4-001 in `checkpoints/04-automated-testing.md`.
+The Block 5 preparation run recorded **161 tests, 161 passed, 0 failed, 0 errors, 0 skipped**. See `checkpoints/block5-test-output.txt` and `checkpoints/block5-test-summary.json`. The Block 4 run recorded 139 tests with one failure, B4-001, documented in `checkpoints/04-automated-testing.md`; its fix is described in `checkpoints/05-debugging.md`.
 
 There is no translation accuracy benchmark, native-speaker evaluation, measured performance benchmark, browser rendering test, or exhaustive Unicode/formatter coverage. These tests verify the declared deterministic profile. A passing test is evidence for its specific asserted behavior only.
