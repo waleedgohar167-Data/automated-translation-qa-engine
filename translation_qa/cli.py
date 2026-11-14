@@ -7,10 +7,60 @@ import sys
 
 from . import __version__
 from .loading import InputError, load_dataset
+from .models import Issue, LoadedDataset
 from .validation import ALL_RULES, validate_dataset
 
 
-def main(argv: list[str] | None = None) -> int:
+# "none" ranks above every severity, so no finding can reach it.
+_FAIL_RANKS = {"informational": 1, "warning": 2, "critical": 3, "none": 4}
+
+
+class OutputError(Exception):
+    """The report destination is unsafe or cannot be written."""
+
+
+def _print_error(kind: str, message: str) -> None:
+    # ASCII-only JSON stays parseable whatever encoding stderr has, for example
+    # a redirected Windows stream using cp1252 (bug B5-005).
+    print(json.dumps({"error": kind, "message": message}, ensure_ascii=True), file=sys.stderr)
+
+
+def _aliases_input(output: Path, input_path: Path) -> bool:
+    """Return True when writing ``output`` would replace the input file.
+
+    Comparing resolved paths catches spelling aliases and symbolic links.
+    ``samefile`` compares the identity of the underlying file, which also
+    catches a hard link: a second name that resolves to a different path but
+    shares the same data (bug B4-001).
+    """
+    if output.resolve() == input_path.resolve():
+        return True
+    try:
+        return output.samefile(input_path)
+    except FileNotFoundError:
+        return False  # A destination that does not exist yet cannot be an alias.
+
+
+def write_report(output: Path, input_path: Path, text: str) -> None:
+    """Save ``text`` as UTF-8 without ever overwriting the input file."""
+    try:
+        if _aliases_input(output, input_path):
+            raise OutputError("Output must not overwrite the input file.")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        # A lone surrogate (for example a truncated "\ud83d" escape in the input)
+        # cannot be encoded as UTF-8. backslashreplace writes it back as the JSON
+        # escape \udXXX, so the saved report stays valid JSON (bug B5-004).
+        output.write_text(text, encoding="utf-8", errors="backslashreplace", newline="\n")
+    except (OSError, ValueError, RuntimeError) as exc:
+        raise OutputError(str(exc)) from exc
+
+
+def exit_code(issues: list[Issue], fail_on: str) -> int:
+    """Return 1 when any finding is at or above the chosen threshold, otherwise 0."""
+    return int(any(_FAIL_RANKS[issue.severity.value] >= _FAIL_RANKS[fail_on] for issue in issues))
+
+
+def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="translation-qa",
                                      description="Inspect and validate translation input files.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -24,27 +74,26 @@ def main(argv: list[str] | None = None) -> int:
     check.add_argument("--output", type=Path, help="Also save the JSON result to this file")
     check.add_argument("--fail-on", choices=("critical", "warning", "informational", "none"),
                        default="critical", help="Exit 1 for issues at or above this severity (default: critical)")
-    args = parser.parse_args(argv)
-    try:
-        dataset = load_dataset(args.input, args.format)
-    except InputError as exc:
-        print(json.dumps({"error": "input_error", "message": str(exc)}, ensure_ascii=False),
-              file=sys.stderr)
-        return 2
-    if args.command == "inspect":
-        output = {
-            "mode": "load_only",
-            "input_file": dataset.filename,
-            "input_format": dataset.input_format,
-            "records_loaded": len(dataset.records),
-            "object_records": sum(isinstance(row.data, dict) for row in dataset.records),
-            "records_with_input_problems": sum(bool(row.input_problems) for row in dataset.records),
-            "validation_performed": False,
-        }
-        print(json.dumps(output, ensure_ascii=True, indent=2))
-        return 0
+    return parser
+
+
+def _inspect(dataset: LoadedDataset) -> int:
+    summary = {
+        "mode": "load_only",
+        "input_file": dataset.filename,
+        "input_format": dataset.input_format,
+        "records_loaded": len(dataset.records),
+        "object_records": sum(isinstance(row.data, dict) for row in dataset.records),
+        "records_with_input_problems": sum(bool(row.input_problems) for row in dataset.records),
+        "validation_performed": False,
+    }
+    print(json.dumps(summary, ensure_ascii=True, indent=2))
+    return 0
+
+
+def _check(dataset: LoadedDataset, args: argparse.Namespace) -> int:
     issues = validate_dataset(dataset)
-    output = {
+    result = {
         "mode": "translation_validation",
         "engine_version": __version__,
         "input_file": dataset.filename,
@@ -55,14 +104,21 @@ def main(argv: list[str] | None = None) -> int:
         "issues": [issue.to_dict() for issue in issues],
     }
     if args.output is not None:
-        try:
-            if args.output.resolve() == Path(args.input).resolve():
-                raise ValueError("Output must not overwrite the input file.")
-            args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        except (OSError, ValueError) as exc:
-            print(json.dumps({"error": "output_error", "message": str(exc)}), file=sys.stderr)
-            return 2
-    print(json.dumps(output, ensure_ascii=True, indent=2))
-    ranks = {"informational": 1, "warning": 2, "critical": 3, "none": 4}
-    return int(any(ranks[issue.severity.value] >= ranks[args.fail_on] for issue in issues))
+        # Save first: if the destination is unsafe, nothing is printed and the exit is 2.
+        write_report(args.output, Path(args.input), json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    print(json.dumps(result, ensure_ascii=True, indent=2))
+    return exit_code(issues, args.fail_on)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = _build_parser().parse_args(argv)
+    try:
+        dataset = load_dataset(args.input, args.format)
+        if args.command == "inspect":
+            return _inspect(dataset)
+        return _check(dataset, args)
+    except InputError as exc:
+        _print_error("input_error", str(exc))
+    except OutputError as exc:
+        _print_error("output_error", str(exc))
+    return 2
