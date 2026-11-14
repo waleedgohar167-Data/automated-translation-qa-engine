@@ -1,0 +1,15 @@
+Executed: 2026-11-14T10:56:12.116846+05:00
+Command: python -m unittest discover -s tests -v
+Exit code: 0
+
+test_csv_and_json_samples_have_identical_records (test_loading.LoadingTests.test_csv_and_json_samples_have_identical_records) ... ok
+test_csv_row_width_problem_is_retained (test_loading.LoadingTests.test_csv_row_width_problem_is_retained) ... ok
+test_duplicate_json_field_is_rejected (test_loading.LoadingTests.test_duplicate_json_field_is_rejected) ... ok
+test_json_preserves_missing_null_and_empty_values (test_loading.LoadingTests.test_json_preserves_missing_null_and_empty_values) ... ok
+test_malformed_json_becomes_clear_input_error (test_loading.LoadingTests.test_malformed_json_becomes_clear_input_error) ... ok
+test_malformed_record_does_not_discard_valid_neighbors (test_loading.LoadingTests.test_malformed_record_does_not_discard_valid_neighbors) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.004s
+
+OK

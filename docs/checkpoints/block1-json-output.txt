@@ -1,0 +1,13 @@
+Executed: 2026-11-14T10:56:12.001636+05:00
+Command: python -m translation_qa inspect samples/translations.json
+Exit code: 0
+
+{
+  "mode": "load_only",
+  "input_file": "translations.json",
+  "input_format": "json",
+  "records_loaded": 6,
+  "object_records": 6,
+  "records_with_input_problems": 0,
+  "validation_performed": false
+}

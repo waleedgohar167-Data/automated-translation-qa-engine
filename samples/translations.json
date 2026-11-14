@@ -1,0 +1,8 @@
+[
+  {"id": "sample-001", "source": "Hello {name}", "translation": "Bonjour {name}", "source_locale": "en", "target_locale": "fr"},
+  {"id": "sample-002", "source": "You have 3 items", "translation": "Vous avez 3 objets", "source_locale": "en", "target_locale": "fr"},
+  {"id": "sample-003", "source": "Save", "translation": "", "source_locale": "en", "target_locale": "fr"},
+  {"id": "sample-004", "source": "Hello {name}", "translation": "Bonjour", "source_locale": "en", "target_locale": "fr"},
+  {"id": "sample-005", "source": "Total: 12", "translation": "Total : 21", "source_locale": "en", "target_locale": "fr"},
+  {"id": "sample-006", "source": "Settings", "translation": "Settings", "source_locale": "en", "target_locale": "fr"}
+]

@@ -1,0 +1,7 @@
+id,source,translation,source_locale,target_locale
+sample-001,Hello {name},Bonjour {name},en,fr
+sample-002,You have 3 items,Vous avez 3 objets,en,fr
+sample-003,Save,,en,fr
+sample-004,Hello {name},Bonjour,en,fr
+sample-005,Total: 12,Total : 21,en,fr
+sample-006,Settings,Settings,en,fr
