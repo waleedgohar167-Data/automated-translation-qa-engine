@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from .fields import normalized_locale, normalized_text, record_identifier, valid_identifier, valid_locale
+from .fields import comparable_text, normalized_locale, record_identifier, valid_identifier, valid_locale
 from .markup import scan_markup
 from .models import Issue, LoadedDataset, Severity
 from .tokens import scan_placeholders
@@ -33,8 +33,8 @@ def cross_record_issues(dataset: LoadedDataset) -> list[Issue]:
         target_tokens = scan_placeholders(target_scan.visible_text)
         if target_tokens.unverified or sum(c.isalpha() for c in target_tokens.literal_text) < 4:
             continue
-        normalized_target = " ".join(normalized_text(target_scan.visible_text).split())
-        normalized_source = " ".join(normalized_text(source_scan.visible_text).split())
+        normalized_target = comparable_text(target_scan.visible_text)
+        normalized_source = comparable_text(source_scan.visible_text)
         key = (normalized_locale(row.get("source_locale")), target_locale, normalized_target)
         translations[key].append((record, normalized_source))
 

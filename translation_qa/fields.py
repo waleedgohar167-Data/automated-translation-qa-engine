@@ -33,3 +33,8 @@ def normalized_locale(value: object) -> str | None:
 
 def normalized_text(value: str) -> str:
     return unicodedata.normalize("NFC", value).strip()
+
+
+def comparable_text(value: str) -> str:
+    """Unicode-normalize and collapse whitespace so two visible texts can be compared."""
+    return " ".join(normalized_text(value).split())
