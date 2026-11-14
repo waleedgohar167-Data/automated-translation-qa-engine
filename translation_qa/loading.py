@@ -12,6 +12,20 @@ class InputError(ValueError):
     """The input file cannot be read or interpreted as a record collection."""
 
 
+_KNOWN_FIELDS = frozenset({"id", "source", "translation", "source_locale", "target_locale"})
+
+
+def _clean_header(name: str) -> str:
+    """Trim spreadsheet padding and accept the documented field names in any letter case.
+
+    Only header labels are cleaned; cell values are never trimmed or coerced.
+    Without this, a header such as "id, source, translation" (bug B5-003) made
+    every row look as if its source and translation were missing.
+    """
+    stripped = name.strip()
+    return stripped.lower() if stripped.lower() in _KNOWN_FIELDS else stripped
+
+
 def _reject_nonfinite(value: str) -> None:
     raise InputError(f"JSON contains a non-standard numeric value: {value}")
 
@@ -40,10 +54,12 @@ def _csv_records(handle: Any) -> tuple[InputRecord, ...]:
     headers = reader.fieldnames
     if not headers:
         raise InputError("CSV must contain a header row.")
-    if any(not header.strip() for header in headers):
+    headers = [_clean_header(header) for header in headers]
+    if any(not header for header in headers):
         raise InputError("CSV header names must not be empty.")
     if len(set(headers)) != len(headers):
         raise InputError("CSV header names must be unique.")
+    reader.fieldnames = headers
     records = []
     for index, row in enumerate(reader, start=1):
         problems = []
