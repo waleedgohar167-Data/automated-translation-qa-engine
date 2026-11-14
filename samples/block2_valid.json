@@ -1,0 +1,6 @@
+[
+  {"id": "welcome", "source": "Hello {name}", "translation": "Bonjour {name}"},
+  {"id": "price", "source": "Price: 12.50", "translation": "Prix : 12,50", "source_locale": "en", "target_locale": "fr"},
+  {"id": "quantity", "source": "You have 3 items", "translation": "Vous avez 3 objets"},
+  {"id": "only-placeholder", "source": "{0}", "translation": "{0}"}
+]

@@ -1,0 +1,78 @@
+Executed: 2026-11-14T11:44:20.811057+05:00
+Command: python -m unittest discover -s tests -v
+Exit code: 1
+
+test_critical_issue_exits_one_and_writes_output (test_cli.CliTests.test_critical_issue_exits_one_and_writes_output) ... ok
+test_input_cannot_be_overwritten_by_output (test_cli.CliTests.test_input_cannot_be_overwritten_by_output) ... ok
+test_original_inspect_command_still_works (test_cli.CliTests.test_original_inspect_command_still_works) ... ok
+test_parse_error_has_no_traceback (test_cli.CliTests.test_parse_error_has_no_traceback) ... ok
+test_valid_input_exits_zero_with_no_issues (test_cli.CliTests.test_valid_input_exits_zero_with_no_issues) ... ok
+test_warning_threshold_is_configurable (test_cli.CliTests.test_warning_threshold_is_configurable) ... ok
+test_csv_and_json_samples_have_identical_records (test_loading.LoadingTests.test_csv_and_json_samples_have_identical_records) ... ok
+test_csv_row_width_problem_is_retained (test_loading.LoadingTests.test_csv_row_width_problem_is_retained) ... ok
+test_duplicate_json_field_is_rejected (test_loading.LoadingTests.test_duplicate_json_field_is_rejected) ... ok
+test_json_preserves_missing_null_and_empty_values (test_loading.LoadingTests.test_json_preserves_missing_null_and_empty_values) ... ok
+test_malformed_json_becomes_clear_input_error (test_loading.LoadingTests.test_malformed_json_becomes_clear_input_error) ... ok
+test_malformed_record_does_not_discard_valid_neighbors (test_loading.LoadingTests.test_malformed_record_does_not_discard_valid_neighbors) ... ok
+test_additional_placeholder_is_critical (test_validation.CoreValidationTests.test_additional_placeholder_is_critical) ... ok
+test_blank_text_is_empty_translation (test_validation.CoreValidationTests.test_blank_text_is_empty_translation) ... ok
+test_brace_format_precision_is_not_a_quantity (test_validation.CoreValidationTests.test_brace_format_precision_is_not_a_quantity) ... ok
+test_complex_braces_are_explicitly_unverified (test_validation.CoreValidationTests.test_complex_braces_are_explicitly_unverified) ... ok
+test_copied_words_are_warning (test_validation.CoreValidationTests.test_copied_words_are_warning) ... ok
+test_copied_words_use_unicode_normalization (test_validation.CoreValidationTests.test_copied_words_use_unicode_normalization) ... ok
+test_correct_translation_has_no_findings (test_validation.CoreValidationTests.test_correct_translation_has_no_findings) ... ok
+test_declared_locale_supports_decimal_comma (test_validation.CoreValidationTests.test_declared_locale_supports_decimal_comma) ... ok
+test_declared_locale_supports_thousands_grouping (test_validation.CoreValidationTests.test_declared_locale_supports_thousands_grouping) ... ok
+test_equal_known_locales_are_not_copied_warning (test_validation.CoreValidationTests.test_equal_known_locales_are_not_copied_warning) ... ok
+test_escaped_braces_and_percent_are_literals (test_validation.CoreValidationTests.test_escaped_braces_and_percent_are_literals) ... ok
+test_every_issue_has_required_serializable_fields (test_validation.CoreValidationTests.test_every_issue_has_required_serializable_fields) ... ok
+test_leading_dot_decimal_is_not_silently_treated_as_integer (test_validation.CoreValidationTests.test_leading_dot_decimal_is_not_silently_treated_as_integer) ... FAIL
+test_malformed_records_do_not_stop_following_records (test_validation.CoreValidationTests.test_malformed_records_do_not_stop_following_records) ... ok
+test_missing_field_is_missing_translation (test_validation.CoreValidationTests.test_missing_field_is_missing_translation) ... ok
+test_missing_placeholder_is_critical (test_validation.CoreValidationTests.test_missing_placeholder_is_critical) ... ok
+test_multiple_independent_errors_are_retained (test_validation.CoreValidationTests.test_multiple_independent_errors_are_retained) ... ok
+test_named_placeholders_can_reorder (test_validation.CoreValidationTests.test_named_placeholders_can_reorder) ... ok
+test_negative_number_is_different_from_positive (test_validation.CoreValidationTests.test_negative_number_is_different_from_positive) ... ok
+test_null_is_missing_translation (test_validation.CoreValidationTests.test_null_is_missing_translation) ... ok
+test_number_difference_is_warning (test_validation.CoreValidationTests.test_number_difference_is_warning) ... ok
+test_number_occurrence_counts_are_preserved (test_validation.CoreValidationTests.test_number_occurrence_counts_are_preserved) ... ok
+test_number_zero_is_not_coerced_to_text (test_validation.CoreValidationTests.test_number_zero_is_not_coerced_to_text) ... ok
+test_numbers_can_reorder (test_validation.CoreValidationTests.test_numbers_can_reorder) ... ok
+test_only_number_or_placeholder_is_not_copied_warning (test_validation.CoreValidationTests.test_only_number_or_placeholder_is_not_copied_warning) ... ok
+test_placeholder_index_is_not_a_quantity (test_validation.CoreValidationTests.test_placeholder_index_is_not_a_quantity) ... ok
+test_printf_named_and_positional_tokens_are_compared (test_validation.CoreValidationTests.test_printf_named_and_positional_tokens_are_compared) ... ok
+test_repeated_placeholder_counts_are_preserved (test_validation.CoreValidationTests.test_repeated_placeholder_counts_are_preserved) ... ok
+test_unicode_digits_compare_by_value (test_validation.CoreValidationTests.test_unicode_digits_compare_by_value) ... ok
+test_unknown_comma_format_is_not_guessed (test_validation.CoreValidationTests.test_unknown_comma_format_is_not_guessed) ... ok
+test_unsupported_french_dot_format_is_not_guessed (test_validation.CoreValidationTests.test_unsupported_french_dot_format_is_not_guessed) ... FAIL
+test_unsupported_printf_is_explicitly_unverified (test_validation.CoreValidationTests.test_unsupported_printf_is_explicitly_unverified) ... FAIL
+
+======================================================================
+FAIL: test_leading_dot_decimal_is_not_silently_treated_as_integer (test_validation.CoreValidationTests.test_leading_dot_decimal_is_not_silently_treated_as_integer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/3d8e4d0651a5/translation-qa-working/tests/test_validation.py", line 101, in test_leading_dot_decimal_is_not_silently_treated_as_integer
+    self.assertTrue(scan.unverified or scan.values == (Decimal("0.5"),))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_unsupported_french_dot_format_is_not_guessed (test_validation.CoreValidationTests.test_unsupported_french_dot_format_is_not_guessed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/3d8e4d0651a5/translation-qa-working/tests/test_validation.py", line 97, in test_unsupported_french_dot_format_is_not_guessed
+    self.assertTrue(scan_numbers("Prix 1.234", "fr").unverified)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_unsupported_printf_is_explicitly_unverified (test_validation.CoreValidationTests.test_unsupported_printf_is_explicitly_unverified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/3d8e4d0651a5/translation-qa-working/tests/test_validation.py", line 69, in test_unsupported_printf_is_explicitly_unverified
+    self.assertEqual(self.types("Hex %x", "Hexadécimal"), {"placeholder_syntax_unverified"})
+AssertionError: Items in the second set but not the first:
+'placeholder_syntax_unverified'
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.020s
+
+FAILED (failures=3)

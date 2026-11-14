@@ -1,0 +1,92 @@
+Executed: 2026-11-14T11:49:48.770984+05:00
+Command: python -m translation_qa check samples/block2_examples.json --output docs/checkpoints/block2-example-output.json
+Exit code: 1 (expected 1)
+
+{
+  "mode": "core_validation",
+  "engine_version": "0.2.0",
+  "input_file": "block2_examples.json",
+  "input_format": "json",
+  "records_analyzed": 11,
+  "rules": [
+    "empty_translation",
+    "missing_translation",
+    "missing_placeholder",
+    "additional_placeholder",
+    "numerical_inconsistency",
+    "source_copied"
+  ],
+  "issue_count": 10,
+  "issues": [
+    {
+      "record_id": "empty",
+      "record_index": 2,
+      "issue_type": "empty_translation",
+      "description": "Translation is empty or contains only whitespace.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "missing",
+      "record_index": 3,
+      "issue_type": "missing_translation",
+      "description": "Translation field is absent or null.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "missing-token",
+      "record_index": 4,
+      "issue_type": "missing_placeholder",
+      "description": "Translation is missing placeholder occurrences: {name} (count 1).",
+      "severity": "critical"
+    },
+    {
+      "record_id": "extra-token",
+      "record_index": 5,
+      "issue_type": "additional_placeholder",
+      "description": "Translation contains unexpected placeholder occurrences: {name} (count 1).",
+      "severity": "critical"
+    },
+    {
+      "record_id": "number-change",
+      "record_index": 6,
+      "issue_type": "numerical_inconsistency",
+      "description": "Numeric values or occurrence counts differ. Source: [3 (count 1)]; translation: [2 (count 1)]. Review whether the change is intentional.",
+      "severity": "warning"
+    },
+    {
+      "record_id": "copied",
+      "record_index": 7,
+      "issue_type": "source_copied",
+      "description": "Translation matches the source after Unicode normalization and outer-whitespace trimming. Names, brands, and shared words may be valid exceptions.",
+      "severity": "warning"
+    },
+    {
+      "record_id": "multiple",
+      "record_index": 8,
+      "issue_type": "missing_placeholder",
+      "description": "Translation is missing placeholder occurrences: {order_id} (count 1).",
+      "severity": "critical"
+    },
+    {
+      "record_id": "multiple",
+      "record_index": 8,
+      "issue_type": "additional_placeholder",
+      "description": "Translation contains unexpected placeholder occurrences: {customer_id} (count 1).",
+      "severity": "critical"
+    },
+    {
+      "record_id": "multiple",
+      "record_index": 8,
+      "issue_type": "numerical_inconsistency",
+      "description": "Numeric values or occurrence counts differ. Source: [3 (count 1)]; translation: [4 (count 1)]. Review whether the change is intentional.",
+      "severity": "warning"
+    },
+    {
+      "record_id": "format-review",
+      "record_index": 11,
+      "issue_type": "number_format_unverified",
+      "description": "Numeric formatting is outside the supported profile. Numeric comparison was skipped; review the values manually.",
+      "severity": "informational"
+    }
+  ]
+}

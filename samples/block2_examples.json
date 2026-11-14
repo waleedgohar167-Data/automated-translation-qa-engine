@@ -1,0 +1,13 @@
+[
+  {"id": "correct", "source": "Hello {name}", "translation": "Bonjour {name}"},
+  {"id": "empty", "source": "Save", "translation": ""},
+  {"id": "missing", "source": "Open"},
+  {"id": "missing-token", "source": "Hello {name}", "translation": "Bonjour"},
+  {"id": "extra-token", "source": "Hello", "translation": "Bonjour {name}"},
+  {"id": "number-change", "source": "You have 3 lives", "translation": "Vous avez 2 vies"},
+  {"id": "copied", "source": "Settings", "translation": "Settings"},
+  {"id": "multiple", "source": "Order {order_id}: 3 items", "translation": "Commande {customer_id} : 4 articles"},
+  {"id": "reordered", "source": "From {from} to {to}", "translation": "Vers {to} depuis {from}"},
+  {"id": "unicode-digits", "source": "You have 12 lives", "translation": "لديك ١٢ حياة"},
+  {"id": "format-review", "source": "Total 1,000", "translation": "Total 1000"}
+]
