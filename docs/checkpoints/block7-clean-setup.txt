@@ -1,0 +1,113 @@
+Clean-setup verification of the final code: fresh clone, no files carried over.
+Environment: Linux-6.18.44-fc-v470-x86_64-with-glibc2.39 | Python 3.13.18
+Recorded (PKT): 2026-11-14T16:30:07+05:00
+Commands are shown as documented in the README; this environment runs python as python3.
+
+$ git clone <repository> && cd automated-translation-qa-engine
+tracked files: 68
+
+$ python -m translation_qa --version
+0.5.0
+[exit code: 0]
+
+$ python -m translation_qa inspect samples/translations.csv
+{
+  "mode": "load_only",
+  "input_file": "translations.csv",
+  "input_format": "csv",
+  "records_loaded": 6,
+  "object_records": 6,
+  "records_with_input_problems": 0,
+  "validation_performed": false
+}
+[exit code: 0]
+
+$ python -m translation_qa inspect samples/translations.json
+{
+  "mode": "load_only",
+  "input_file": "translations.json",
+  "input_format": "json",
+  "records_loaded": 6,
+  "object_records": 6,
+  "records_with_input_problems": 0,
+  "validation_performed": false
+}
+[exit code: 0]
+
+$ python -m translation_qa check samples/block3_valid.csv     (JSON output summarized)
+records_analyzed: 6 | issue_count: 0 | issue types: []
+[exit code: 0]
+
+$ python -m translation_qa check samples/translations.csv     (JSON output summarized)
+records_analyzed: 6 | issue_count: 4 | issue types: ['empty_translation', 'missing_placeholder', 'numerical_inconsistency', 'source_copied']
+[exit code: 1; 1 = critical findings detected, expected]
+
+$ python -m translation_qa check samples/translations.json    (JSON output summarized)
+records_analyzed: 6 | issue_count: 4 | issue types: ['empty_translation', 'missing_placeholder', 'numerical_inconsistency', 'source_copied']
+[exit code: 1; 1 = critical findings detected, expected]
+
+$ python -m translation_qa report samples/translations.csv --report-format text
+Translation QA report
+Input:      translations.csv (csv)
+Engine:     0.5.0
+Generated:  2026-11-14T11:30:08Z
+
+Summary
+  Records analyzed:        6
+  Records with issues:     4 (66.7%)
+  Records without issues:  2
+  Total issues:            4
+  Average per record:      0.67
+  Highest severity:        critical
+
+Issues by severity
+  critical           2
+  warning            2
+  informational      0
+
+Issues by category
+  empty_translation          1  critical
+  missing_placeholder        1  critical
+  numerical_inconsistency    1  warning
+  source_copied              1  warning
+
+Affected records
+  #3 "sample-003" [critical] empty_translation
+  #4 "sample-004" [critical] missing_placeholder
+  #5 "sample-005" [warning] numerical_inconsistency
+  #6 "sample-006" [warning] source_copied
+
+Counts are rule findings under the documented profiles, not a translation accuracy score.
+[exit code: 1; 1 = critical findings detected, expected]
+
+$ python -m translation_qa report samples/block3_examples.json --output reports/report.json     (JSON output summarized)
+summary: {"total_records": 17, "total_issues": 15, "records_with_issues": 15, "highest_severity": "critical"}
+[exit code: 1; 1 = critical findings detected, expected]
+saved reports/report.json parses as JSON; total_issues: 15
+
+$ python -m unittest discover -s tests
+----------------------------------------------------------------------
+Ran 183 tests in 1.143s
+
+OK
+[exit code: 0]
+
+$ python -m venv .venv && .venv/bin/python -m pip install -e ".[test]"
+[exit code: 0]
+pytest                          9.2.0
+
+$ translation-qa --version     (installed console command)
+0.5.0
+[exit code: 0]
+
+$ python -m pytest -q
+.............................................................................                                  [100%]
+183 passed, 72 subtests passed in 1.24s
+[exit code: 0]
+
+$ git status --short     (generated files must not appear as changes)
+[end of git status; empty means clean]
+
+Credential scan over tracked text files (API keys, passwords, private keys, access tokens):
+no matches
+Environment files tracked: 0
