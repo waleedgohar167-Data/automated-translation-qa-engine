@@ -1,0 +1,38 @@
+{
+  "checkpoint": "Block 4 - Automated Testing",
+  "baseline_commit": "1dc755db76a498f8931beb5b40018cbf851a5153",
+  "engine_version": "0.3.0",
+  "environment": "Preparation environment; run in VS Code to record local results",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python_version": "3.12.14",
+  "recorded_at_pkt": "2026-11-14T14:09:47+05:00",
+  "command": "python -m unittest discover -s tests -v",
+  "total_tests": 139,
+  "passed": 138,
+  "failed": 1,
+  "errors": 0,
+  "skipped": 0,
+  "exit_code": 1,
+  "failing_tests": [
+    "test_cli_integration.CliIntegrationTests.test_hardlink_output_cannot_overwrite_input"
+  ],
+  "bug_ids": [
+    "B4-001"
+  ],
+  "counting_note": "unittest test methods; subTest examples are not counted as extra test methods",
+  "test_modules": {
+    "test_advanced_validation.py": 44,
+    "test_cli.py": 6,
+    "test_cli_integration.py": 13,
+    "test_duplicates.py": 12,
+    "test_input_boundaries.py": 17,
+    "test_loading.py": 6,
+    "test_pipeline_contracts.py": 8,
+    "test_validation.py": 33
+  },
+  "limitations": [
+    "No measured linguistic accuracy",
+    "No measured line or branch coverage",
+    "Filesystem link support may cause platform-dependent skips"
+  ]
+}

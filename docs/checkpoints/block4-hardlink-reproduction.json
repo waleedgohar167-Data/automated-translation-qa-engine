@@ -1,0 +1,13 @@
+{
+  "bug_id": "B4-001",
+  "environment": "Disposable temporary files only",
+  "paths_refer_to_same_file": true,
+  "expected_exit_code": 2,
+  "actual_exit_code": 0,
+  "expected_input_unchanged": true,
+  "actual_input_unchanged": false,
+  "original_input_bytes": 53,
+  "after_report_write_bytes": 794,
+  "stderr": "",
+  "fix_status": "Open for Block 5"
+}
