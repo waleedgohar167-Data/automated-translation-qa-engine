@@ -1,4 +1,4 @@
-# Automated test plan — Blocks 4 and 5
+# Automated test plan — Blocks 4 to 6
 
 ## Purpose and approach
 
@@ -44,7 +44,8 @@ All file-alias tests create their own temporary input and output files. If the e
 | `test_cli_integration.py` | 13 | New subprocess command, exit policy, output, and file-alias tests |
 | `test_pipeline_contracts.py` | 8 | New combined-rule, non-mutation, ordering, and serialization tests |
 | `test_regressions.py` | 22 | Block 5 regression and guard tests for B4-001 and B5-001 to B5-006, plus record-failure isolation |
-| **Total** | **161** | Discovered test methods |
+| `test_reporting.py` | 22 | Block 6 report aggregation, text layout, and `report` command |
+| **Total** | **183** | Discovered test methods |
 
 ## Assignment requirements mapped to assertions
 
@@ -77,6 +78,6 @@ Names below are actual test methods. This is a behavioral coverage map, not a me
 
 ## Results and limits
 
-The Block 5 preparation run recorded **161 tests, 161 passed, 0 failed, 0 errors, 0 skipped**. See `checkpoints/block5-test-output.txt` and `checkpoints/block5-test-summary.json`. The Block 4 run recorded 139 tests with one failure, B4-001, documented in `checkpoints/04-automated-testing.md`; its fix is described in `checkpoints/05-debugging.md`.
+The Block 6 preparation run recorded **183 tests, 183 passed, 0 failed, 0 errors, 0 skipped**; see `checkpoints/block6-test-output.txt`. The Block 5 run recorded 161 tests, all passing; see `checkpoints/block5-test-output.txt` and `checkpoints/block5-test-summary.json`. The Block 4 run recorded 139 tests with one failure, B4-001, documented in `checkpoints/04-automated-testing.md`; its fix is described in `checkpoints/05-debugging.md`.
 
 There is no translation accuracy benchmark, native-speaker evaluation, measured performance benchmark, browser rendering test, or exhaustive Unicode/formatter coverage. These tests verify the declared deterministic profile. A passing test is evidence for its specific asserted behavior only.

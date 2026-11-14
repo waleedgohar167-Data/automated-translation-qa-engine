@@ -1,0 +1,49 @@
+Translation QA report
+Input:      block3_examples.json (json)
+Engine:     0.5.0
+Generated:  2026-11-14T11:25:08Z
+
+Summary
+  Records analyzed:        17
+  Records with issues:     15 (88.2%)
+  Records without issues:  2
+  Total issues:            15
+  Average per record:      0.88
+  Highest severity:        critical
+
+Issues by severity
+  critical          10
+  warning            3
+  informational      2
+
+Issues by category
+  duplicate_record_id             2  critical
+  duplicate_translation           2  informational
+  invalid_field                   2  critical
+  suspicious_translation_reuse    2  warning
+  html_tag_mismatch               1  critical
+  invalid_record                  1  critical
+  missing_field                   1  critical
+  missing_html_tag                1  critical
+  placeholder_format_mismatch     1  warning
+  placeholder_order_mismatch      1  critical
+  unexpected_html_tag             1  critical
+
+Affected records
+  #2 "missing-tag" [critical] missing_html_tag
+  #3 "extra-tag" [critical] unexpected_html_tag
+  #4 "bad-nesting" [critical] html_tag_mismatch
+  #5 "format-change" [warning] placeholder_format_mismatch
+  #6 "argument-order" [critical] placeholder_order_mismatch
+  #7 "row:7" [critical] missing_field
+  #8 "invalid-source" [critical] invalid_field
+  #9 "invalid-locale" [critical] invalid_field
+  #10 "duplicate-id" [critical] duplicate_record_id
+  #11 "duplicate-id" [critical] duplicate_record_id
+  #12 "reuse-start" [warning] suspicious_translation_reuse
+  #13 "reuse-end" [warning] suspicious_translation_reuse
+  #14 "repeated-a" [informational] duplicate_translation
+  #15 "repeated-b" [informational] duplicate_translation
+  #16 "row:16" [critical] invalid_record
+
+Counts are rule findings under the documented profiles, not a translation accuracy score.

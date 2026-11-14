@@ -2,7 +2,7 @@
 
 A Python command-line tool that compares source and translated text and reports deterministic localization issues.
 
-**Current checkpoint: Block 5 — debugging.** CSV/JSON loading, all six core categories, HTML-fragment checks, placeholder consistency, field validation, and cross-record review rules are implemented within the documented profiles. The suite has 161 tests and all of them pass. The hard-link overwrite bug found in Block 4 and six further defects are fixed; see the [Block 5 checkpoint](docs/checkpoints/05-debugging.md). Aggregate reporting remains scheduled for Block 6.
+**Current checkpoint: Block 6 — reporting engine.** CSV/JSON loading, all six core categories, HTML-fragment checks, placeholder consistency, field validation, cross-record review rules, and aggregated reporting are implemented within the documented profiles. The suite has 183 tests and all of them pass. See the [Block 5 checkpoint](docs/checkpoints/05-debugging.md) for the seven defects fixed and the [Block 6 checkpoint](docs/checkpoints/06-reporting.md) for the report structure.
 
 ## Requirements and setup
 
@@ -45,6 +45,17 @@ The same rules also accept CSV:
 ```bash
 python -m translation_qa check samples/translations.csv
 ```
+
+### Generate a report
+
+`report` runs the same validation and adds grouped statistics: total records, total issues, issues by category and by severity, affected record identifiers, and summary statistics.
+
+```bash
+python -m translation_qa report samples/translations.csv --report-format text
+python -m translation_qa report samples/block3_examples.json --output docs/checkpoints/block6-report.json
+```
+
+`--report-format` is `json` (default) or `text`. `--output` saves the chosen format as well as printing it. `--format` and `--fail-on` work as they do for `check`. The structure is described in the [Block 6 checkpoint](docs/checkpoints/06-reporting.md).
 
 ### Exit codes
 
@@ -113,7 +124,7 @@ Malformed records do not stop valid neighbors. If a rule fails unexpectedly on o
 }
 ```
 
-The surrounding output includes the engine version, input file/format, analyzed record count, supported issue categories, issue count, and issue list. Grouped category/severity statistics are scheduled for Block 6.
+The surrounding output includes the engine version, input file/format, analyzed record count, supported issue categories, issue count, and issue list. The `report` command adds grouped category and severity statistics, affected record identifiers, and summary statistics.
 
 ## Architecture
 
@@ -129,6 +140,7 @@ translation_qa/
     markup.py         Raw delimiters, tag stack, and visible-text extraction
     duplicates.py     Locale-scoped cross-record review checks
     validation.py     Rule orchestration and deterministic issue ordering
+    reporting.py      Aggregated report structure and plain-text layout
 samples/              Synthetic control and issue fixtures
 tests/                Input, rule, and CLI tests
 docs/checkpoints/     Checkpoint notes and actual execution evidence
@@ -142,13 +154,13 @@ Both file formats use the same validation engine. Rules return issue objects and
 python -m unittest discover -s tests -v
 ```
 
-Current checkpoint: **161 tests: 161 passed, 0 failed, 0 errors, 0 skipped** in the Linux preparation environment. The 139 Block 4 tests are unchanged; 22 tests in `tests/test_regressions.py` cover the defects fixed in Block 5. Counts are discovered test methods; additional `subTest` examples are not counted separately. The same suite also runs under `python -m pytest` when pytest is installed.
+Current checkpoint: **183 tests: 183 passed, 0 failed, 0 errors, 0 skipped** in the Linux preparation environment. The 139 Block 4 tests are unchanged; 22 tests in `tests/test_regressions.py` cover the defects fixed in Block 5 and 22 tests in `tests/test_reporting.py` cover the reporting engine. Counts are discovered test methods; additional `subTest` examples are not counted separately. The same suite also runs under `python -m pytest` when pytest is installed.
 
 The Block 4 failing test, `test_hardlink_output_cannot_overwrite_input`, now passes without having been modified. Bug **B4-001** (a report path that is a hard link to the input could overwrite that input) is fixed by comparing file identity before anything is written.
 
 On Windows, symbolic-link tests may be skipped when the account cannot create them. Hard-link tests skip only if the filesystem cannot create a hard link. Record actual local results and any skips; the Linux result above is not a claim about another machine.
 
-See the [requirements-to-tests map](docs/testing.md), [Block 5 checkpoint](docs/checkpoints/05-debugging.md), [test summary](docs/checkpoints/block5-test-summary.json), and [terminal output](docs/checkpoints/block5-test-output.txt). Tests verify explicit expectations for core/advanced rules, file formats, malformed inputs, CLI exits, serialized findings, non-mutation, and deterministic results. No line/branch coverage percentage or linguistic-accuracy metric has been measured.
+See the [requirements-to-tests map](docs/testing.md), [Block 5 checkpoint](docs/checkpoints/05-debugging.md), [Block 5 test summary](docs/checkpoints/block5-test-summary.json), and [latest terminal output](docs/checkpoints/block6-test-output.txt). Tests verify explicit expectations for core/advanced rules, file formats, malformed inputs, CLI exits, serialized findings, non-mutation, and deterministic results. No line/branch coverage percentage or linguistic-accuracy metric has been measured.
 
 Python's standard-library `unittest` framework was chosen for automatic assertions, discovery, and reproducible execution without installing a testing dependency.
 
@@ -168,4 +180,4 @@ Python's standard-library `unittest` framework was chosen for automatic assertio
 
 ## Evidence and development transparency
 
-See [Block 1](docs/checkpoints/01-foundation.md), [Block 2](docs/checkpoints/02-core-validation.md), [Block 3](docs/checkpoints/03-advanced-validation.md), [Block 4](docs/checkpoints/04-automated-testing.md), [Block 5](docs/checkpoints/05-debugging.md), and [rule definitions](docs/validation-rules.md). Samples are synthetic. AI assisted development; results state the environment where they were actually generated. Remote commit references and reviewer access must be verified on GitHub.
+See [Block 1](docs/checkpoints/01-foundation.md), [Block 2](docs/checkpoints/02-core-validation.md), [Block 3](docs/checkpoints/03-advanced-validation.md), [Block 4](docs/checkpoints/04-automated-testing.md), [Block 5](docs/checkpoints/05-debugging.md), [Block 6](docs/checkpoints/06-reporting.md), and [rule definitions](docs/validation-rules.md). Samples are synthetic. AI assisted development; results state the environment where they were actually generated. Remote commit references and reviewer access must be verified on GitHub.

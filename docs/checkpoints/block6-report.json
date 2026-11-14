@@ -1,0 +1,426 @@
+{
+  "report": "translation_qa_report",
+  "report_version": 1,
+  "engine_version": "0.5.0",
+  "generated_at": "2026-11-14T11:25:08Z",
+  "input": {
+    "file": "block3_examples.json",
+    "format": "json"
+  },
+  "note": "Counts are rule findings under the documented profiles, not a translation accuracy score.",
+  "summary": {
+    "total_records": 17,
+    "total_issues": 15,
+    "records_with_issues": 15,
+    "records_without_issues": 2,
+    "records_with_issues_percent": 88.2,
+    "average_issues_per_record": 0.88,
+    "max_issues_on_one_record": 1,
+    "distinct_issue_types": 11,
+    "most_common_issue_type": "duplicate_record_id",
+    "highest_severity": "critical",
+    "records_by_highest_severity": {
+      "critical": 10,
+      "warning": 3,
+      "informational": 2,
+      "none": 2
+    }
+  },
+  "issues_by_severity": {
+    "critical": {
+      "count": 10,
+      "record_ids": [
+        "missing-tag",
+        "extra-tag",
+        "bad-nesting",
+        "argument-order",
+        "row:7",
+        "invalid-source",
+        "invalid-locale",
+        "duplicate-id",
+        "row:16"
+      ]
+    },
+    "warning": {
+      "count": 3,
+      "record_ids": [
+        "format-change",
+        "reuse-start",
+        "reuse-end"
+      ]
+    },
+    "informational": {
+      "count": 2,
+      "record_ids": [
+        "repeated-a",
+        "repeated-b"
+      ]
+    }
+  },
+  "issues_by_category": {
+    "duplicate_record_id": {
+      "count": 2,
+      "severity": "critical",
+      "record_ids": [
+        "duplicate-id"
+      ]
+    },
+    "duplicate_translation": {
+      "count": 2,
+      "severity": "informational",
+      "record_ids": [
+        "repeated-a",
+        "repeated-b"
+      ]
+    },
+    "invalid_field": {
+      "count": 2,
+      "severity": "critical",
+      "record_ids": [
+        "invalid-source",
+        "invalid-locale"
+      ]
+    },
+    "suspicious_translation_reuse": {
+      "count": 2,
+      "severity": "warning",
+      "record_ids": [
+        "reuse-start",
+        "reuse-end"
+      ]
+    },
+    "html_tag_mismatch": {
+      "count": 1,
+      "severity": "critical",
+      "record_ids": [
+        "bad-nesting"
+      ]
+    },
+    "invalid_record": {
+      "count": 1,
+      "severity": "critical",
+      "record_ids": [
+        "row:16"
+      ]
+    },
+    "missing_field": {
+      "count": 1,
+      "severity": "critical",
+      "record_ids": [
+        "row:7"
+      ]
+    },
+    "missing_html_tag": {
+      "count": 1,
+      "severity": "critical",
+      "record_ids": [
+        "missing-tag"
+      ]
+    },
+    "placeholder_format_mismatch": {
+      "count": 1,
+      "severity": "warning",
+      "record_ids": [
+        "format-change"
+      ]
+    },
+    "placeholder_order_mismatch": {
+      "count": 1,
+      "severity": "critical",
+      "record_ids": [
+        "argument-order"
+      ]
+    },
+    "unexpected_html_tag": {
+      "count": 1,
+      "severity": "critical",
+      "record_ids": [
+        "extra-tag"
+      ]
+    }
+  },
+  "affected_record_ids": [
+    "missing-tag",
+    "extra-tag",
+    "bad-nesting",
+    "format-change",
+    "argument-order",
+    "row:7",
+    "invalid-source",
+    "invalid-locale",
+    "duplicate-id",
+    "reuse-start",
+    "reuse-end",
+    "repeated-a",
+    "repeated-b",
+    "row:16"
+  ],
+  "affected_records": [
+    {
+      "record_id": "missing-tag",
+      "record_index": 2,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "missing_html_tag"
+      ]
+    },
+    {
+      "record_id": "extra-tag",
+      "record_index": 3,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "unexpected_html_tag"
+      ]
+    },
+    {
+      "record_id": "bad-nesting",
+      "record_index": 4,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "html_tag_mismatch"
+      ]
+    },
+    {
+      "record_id": "format-change",
+      "record_index": 5,
+      "issue_count": 1,
+      "highest_severity": "warning",
+      "issue_types": [
+        "placeholder_format_mismatch"
+      ]
+    },
+    {
+      "record_id": "argument-order",
+      "record_index": 6,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "placeholder_order_mismatch"
+      ]
+    },
+    {
+      "record_id": "row:7",
+      "record_index": 7,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "missing_field"
+      ]
+    },
+    {
+      "record_id": "invalid-source",
+      "record_index": 8,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "invalid_field"
+      ]
+    },
+    {
+      "record_id": "invalid-locale",
+      "record_index": 9,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "invalid_field"
+      ]
+    },
+    {
+      "record_id": "duplicate-id",
+      "record_index": 10,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "duplicate_record_id"
+      ]
+    },
+    {
+      "record_id": "duplicate-id",
+      "record_index": 11,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "duplicate_record_id"
+      ]
+    },
+    {
+      "record_id": "reuse-start",
+      "record_index": 12,
+      "issue_count": 1,
+      "highest_severity": "warning",
+      "issue_types": [
+        "suspicious_translation_reuse"
+      ]
+    },
+    {
+      "record_id": "reuse-end",
+      "record_index": 13,
+      "issue_count": 1,
+      "highest_severity": "warning",
+      "issue_types": [
+        "suspicious_translation_reuse"
+      ]
+    },
+    {
+      "record_id": "repeated-a",
+      "record_index": 14,
+      "issue_count": 1,
+      "highest_severity": "informational",
+      "issue_types": [
+        "duplicate_translation"
+      ]
+    },
+    {
+      "record_id": "repeated-b",
+      "record_index": 15,
+      "issue_count": 1,
+      "highest_severity": "informational",
+      "issue_types": [
+        "duplicate_translation"
+      ]
+    },
+    {
+      "record_id": "row:16",
+      "record_index": 16,
+      "issue_count": 1,
+      "highest_severity": "critical",
+      "issue_types": [
+        "invalid_record"
+      ]
+    }
+  ],
+  "rules": [
+    "empty_translation",
+    "missing_translation",
+    "missing_placeholder",
+    "additional_placeholder",
+    "numerical_inconsistency",
+    "source_copied",
+    "html_tag_mismatch",
+    "missing_html_tag",
+    "unexpected_html_tag",
+    "html_structure_changed",
+    "html_content_unverified",
+    "placeholder_format_mismatch",
+    "placeholder_order_mismatch",
+    "invalid_record",
+    "missing_field",
+    "invalid_field",
+    "duplicate_record_id",
+    "duplicate_translation",
+    "suspicious_translation_reuse",
+    "placeholder_syntax_unverified",
+    "number_format_unverified",
+    "validation_error"
+  ],
+  "issues": [
+    {
+      "record_id": "missing-tag",
+      "record_index": 2,
+      "issue_type": "missing_html_tag",
+      "description": "Translation is missing tag occurrences: <b> (count 1).",
+      "severity": "critical"
+    },
+    {
+      "record_id": "extra-tag",
+      "record_index": 3,
+      "issue_type": "unexpected_html_tag",
+      "description": "Translation adds tag occurrences: <i> (count 1).",
+      "severity": "critical"
+    },
+    {
+      "record_id": "bad-nesting",
+      "record_index": 4,
+      "issue_type": "html_tag_mismatch",
+      "description": "Translation fragment: Closing tag </i> does not match <b>. Unclosed tags: b.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "format-change",
+      "record_index": 5,
+      "issue_type": "placeholder_format_mismatch",
+      "description": "Placeholder identities/counts match but conversion, width, or format modifiers differ; review the intended formatting.",
+      "severity": "warning"
+    },
+    {
+      "record_id": "argument-order",
+      "record_index": 6,
+      "issue_type": "placeholder_order_mismatch",
+      "description": "Unnumbered printf argument types changed order, which can change argument binding. Use matching order or supported explicit positions.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "row:7",
+      "record_index": 7,
+      "issue_type": "missing_field",
+      "description": "Required field 'id' is absent; a row identifier was assigned.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "invalid-source",
+      "record_index": 8,
+      "issue_type": "invalid_field",
+      "description": "Field 'source' must be a non-blank string.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "invalid-locale",
+      "record_index": 9,
+      "issue_type": "invalid_field",
+      "description": "Optional field 'target_locale' must be a locale string such as en or fr-FR, or be unspecified. Numeric comparison was skipped.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "duplicate-id",
+      "record_index": 10,
+      "issue_type": "duplicate_record_id",
+      "description": "Identifier is shared by 2 input records; use record_index to locate each occurrence.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "duplicate-id",
+      "record_index": 11,
+      "issue_type": "duplicate_record_id",
+      "description": "Identifier is shared by 2 input records; use record_index to locate each occurrence.",
+      "severity": "critical"
+    },
+    {
+      "record_id": "reuse-start",
+      "record_index": 12,
+      "issue_type": "suspicious_translation_reuse",
+      "description": "The same visible translation is used for 2 distinct source texts in target locale 'fr'. Review context; this may be valid.",
+      "severity": "warning"
+    },
+    {
+      "record_id": "reuse-end",
+      "record_index": 13,
+      "issue_type": "suspicious_translation_reuse",
+      "description": "The same visible translation is used for 2 distinct source texts in target locale 'fr'. Review context; this may be valid.",
+      "severity": "warning"
+    },
+    {
+      "record_id": "repeated-a",
+      "record_index": 14,
+      "issue_type": "duplicate_translation",
+      "description": "The same source/translation pair is repeated in 2 records for target locale 'fr'. This can be intentional.",
+      "severity": "informational"
+    },
+    {
+      "record_id": "repeated-b",
+      "record_index": 15,
+      "issue_type": "duplicate_translation",
+      "description": "The same source/translation pair is repeated in 2 records for target locale 'fr'. This can be intentional.",
+      "severity": "informational"
+    },
+    {
+      "record_id": "row:16",
+      "record_index": 16,
+      "issue_type": "invalid_record",
+      "description": "Record must be an object containing id, source, and translation fields.",
+      "severity": "critical"
+    }
+  ]
+}
