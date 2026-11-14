@@ -1,4 +1,4 @@
-"""CLI for input inspection and deterministic translation validation."""
+"""CLI for input inspection, deterministic translation validation, and reporting."""
 
 import argparse
 import json
@@ -8,6 +8,7 @@ import sys
 from . import __version__
 from .loading import InputError, load_dataset
 from .models import Issue, LoadedDataset
+from .reporting import build_report, render_text
 from .validation import ALL_RULES, validate_dataset
 
 
@@ -60,6 +61,25 @@ def exit_code(issues: list[Issue], fail_on: str) -> int:
     return int(any(_FAIL_RANKS[issue.severity.value] >= _FAIL_RANKS[fail_on] for issue in issues))
 
 
+def _print_console(text: str) -> None:
+    """Print text that may hold any character without crashing a legacy console.
+
+    stdout raises on characters its encoding cannot represent, such as cp1252
+    on Windows. Those characters are shown as backslash escapes instead.
+    """
+    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+    print(text.encode(encoding, errors="backslashreplace").decode(encoding))
+
+
+def _add_run_arguments(command: argparse.ArgumentParser, output_help: str) -> None:
+    """Arguments shared by every command that runs validation."""
+    command.add_argument("input", help="Input CSV or JSON file")
+    command.add_argument("--format", choices=("auto", "csv", "json"), default="auto")
+    command.add_argument("--output", type=Path, help=output_help)
+    command.add_argument("--fail-on", choices=("critical", "warning", "informational", "none"),
+                         default="critical", help="Exit 1 for issues at or above this severity (default: critical)")
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="translation-qa",
                                      description="Inspect and validate translation input files.")
@@ -69,11 +89,11 @@ def _build_parser() -> argparse.ArgumentParser:
     inspect.add_argument("input", help="Input CSV or JSON file")
     inspect.add_argument("--format", choices=("auto", "csv", "json"), default="auto")
     check = commands.add_parser("check", help="Run translation validation and emit structured issues.")
-    check.add_argument("input", help="Input CSV or JSON file")
-    check.add_argument("--format", choices=("auto", "csv", "json"), default="auto")
-    check.add_argument("--output", type=Path, help="Also save the JSON result to this file")
-    check.add_argument("--fail-on", choices=("critical", "warning", "informational", "none"),
-                       default="critical", help="Exit 1 for issues at or above this severity (default: critical)")
+    _add_run_arguments(check, "Also save the JSON result to this file")
+    report = commands.add_parser("report", help="Run validation and emit an aggregated report.")
+    _add_run_arguments(report, "Also save the report to this file")
+    report.add_argument("--report-format", choices=("json", "text"), default="json",
+                        help="Report layout: structured JSON or a plain-text summary (default: json)")
     return parser
 
 
@@ -110,12 +130,28 @@ def _check(dataset: LoadedDataset, args: argparse.Namespace) -> int:
     return exit_code(issues, args.fail_on)
 
 
+def _report(dataset: LoadedDataset, args: argparse.Namespace) -> int:
+    issues = validate_dataset(dataset)
+    report = build_report(dataset, issues)
+    if args.report_format == "text":
+        saved = printed = render_text(report)
+    else:
+        saved = json.dumps(report, ensure_ascii=False, indent=2)
+        printed = json.dumps(report, ensure_ascii=True, indent=2)
+    if args.output is not None:
+        write_report(args.output, Path(args.input), saved + "\n")
+    _print_console(printed)
+    return exit_code(issues, args.fail_on)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     try:
         dataset = load_dataset(args.input, args.format)
         if args.command == "inspect":
             return _inspect(dataset)
+        if args.command == "report":
+            return _report(dataset, args)
         return _check(dataset, args)
     except InputError as exc:
         _print_error("input_error", str(exc))
