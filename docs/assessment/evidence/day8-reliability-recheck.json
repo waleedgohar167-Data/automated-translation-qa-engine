@@ -1,0 +1,150 @@
+{
+  "audit": "Day 8 Block 1",
+  "executed_commit": "5f02ae8dd33245657ad26384a0b1d8894a08dfde",
+  "engine_version": "0.5.0",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "recorded_at_utc": "2026-11-16T08:31:10.902581+00:00",
+  "note": "Observations only. The engine and test suite are unchanged. Injection is labeled per probe.",
+  "observations": {
+    "report_control": {
+      "records": 17,
+      "issues": 15,
+      "category_sum": 15,
+      "severity_sum": 15,
+      "record_severity_sum": 17,
+      "same_findings_as_validation": true
+    },
+    "A01_cross_record_isolation": {
+      "fault_injected": true,
+      "normal_control_types": [
+        "empty_translation"
+      ],
+      "expected": "An affected-record diagnostic and later findings remain available; no exception escapes.",
+      "single_record_guard_types": [
+        "validation_error"
+      ],
+      "returned_types": null,
+      "exception_escaped": "RuntimeError"
+    },
+    "A02_interrupted_report_write": {
+      "fault_injected": true,
+      "expected": "A failed replacement leaves the previous complete report available.",
+      "exit_code": 2,
+      "error": {
+        "error": "output_error",
+        "message": "[Errno 28] audit-injected partial write"
+      },
+      "stdout_empty": true,
+      "input_unchanged": true,
+      "previous_report_preserved": false,
+      "remaining_report_is_valid_json": false,
+      "remaining_characters": 24
+    },
+    "A03_csv_json_size_boundary": {
+      "fault_injected": false,
+      "csv_field_limit_characters": 131072,
+      "field_length_characters": 131073,
+      "equivalent_logical_records": true,
+      "formats": {
+        "json": {
+          "exit_code": 0,
+          "result": {
+            "mode": "translation_validation",
+            "engine_version": "0.5.0",
+            "input_file": "long.json",
+            "input_format": "json",
+            "records_analyzed": 1,
+            "rules": [
+              "empty_translation",
+              "missing_translation",
+              "missing_placeholder",
+              "additional_placeholder",
+              "numerical_inconsistency",
+              "source_copied",
+              "html_tag_mismatch",
+              "missing_html_tag",
+              "unexpected_html_tag",
+              "html_structure_changed",
+              "html_content_unverified",
+              "placeholder_format_mismatch",
+              "placeholder_order_mismatch",
+              "invalid_record",
+              "missing_field",
+              "invalid_field",
+              "duplicate_record_id",
+              "duplicate_translation",
+              "suspicious_translation_reuse",
+              "placeholder_syntax_unverified",
+              "number_format_unverified",
+              "validation_error"
+            ],
+            "issue_count": 0,
+            "issues": []
+          }
+        },
+        "csv": {
+          "exit_code": 2,
+          "result": {
+            "error": "input_error",
+            "message": "Cannot load long.csv: field larger than field limit (131072)"
+          }
+        }
+      }
+    },
+    "A04_nesting_resource_growth": {
+      "fault_injected": false,
+      "observations": [
+        {
+          "depth": 100,
+          "stored_tag_paths": 100,
+          "total_stored_path_elements": 5050,
+          "markup_errors": 0
+        },
+        {
+          "depth": 200,
+          "stored_tag_paths": 200,
+          "total_stored_path_elements": 20100,
+          "markup_errors": 0
+        },
+        {
+          "depth": 400,
+          "stored_tag_paths": 400,
+          "total_stored_path_elements": 80200,
+          "markup_errors": 0
+        }
+      ],
+      "note": "Bounded structural probe. No exhaustion or real workload throughput was tested."
+    },
+    "A05_documented_profile_limits": {
+      "unsupported_percent_at": {
+        "input": {
+          "id": "unsupported",
+          "source": "Hello %@",
+          "translation": "Bonjour"
+        },
+        "issue_types": []
+      },
+      "documented_offset_sign_tradeoff": {
+        "input": {
+          "id": "offset",
+          "source": "UTC-5",
+          "translation": "UTC+5"
+        },
+        "issue_types": []
+      },
+      "reuse_without_locale": [],
+      "reuse_with_declared_target_locale": [
+        "suspicious_translation_reuse",
+        "suspicious_translation_reuse"
+      ]
+    },
+    "A06_ci_evidence_gap": {
+      "tracked_workflow_paths": [],
+      "runtime_verified_in_this_audit": "3.12.14",
+      "python_3_11_run_in_this_audit": false,
+      "python_3_13_run_in_this_audit": false,
+      "remote_ci_checked": false
+    }
+  }
+}

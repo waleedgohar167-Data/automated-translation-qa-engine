@@ -1,0 +1,1421 @@
+{
+  "schema_version": 1,
+  "title": "Day 8 independent mechanical QA challenge set",
+  "created_at_utc": "2026-11-16T08:27:55.816020+00:00",
+  "expectation_policy": "Manually specified before execution; exact issue multiset includes record identity, index, type and severity. No language-quality labels or production estimates.",
+  "counts": {
+    "valid": 12,
+    "defective": 18,
+    "boundary": 10
+  },
+  "cases": [
+    {
+      "id": "V01",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Named arguments may move",
+      "rationale": "Reordering named placeholders preserves binding; both identities and counts are unchanged.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "named-order",
+            "source": "Send {count} files to {name}.",
+            "translation": "Pour {name}, envoyer {count} fichiers.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V02",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Template whitespace and repeated occurrences",
+      "rationale": "Whitespace inside supported double-brace names is insignificant; both repeated occurrences remain.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "template-space",
+            "source": "Hello {{ user.name }}; welcome {{user.name}}.",
+            "translation": "Bonjour {{user.name}} ; bienvenue {{ user.name }}.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V03",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Explicit printf positions may move",
+      "rationale": "Explicit argument positions allow word-order changes without rebinding.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "printf-position",
+            "source": "User %1$s has %2$d credits.",
+            "translation": "Crédits : %2$d ; utilisateur : %1$s.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V04",
+      "group": "valid",
+      "category": "numbers",
+      "title": "Declared German grouping and decimals",
+      "rationale": "The supported en/de profiles represent the same decimal quantity with different separators.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "locale-number",
+            "source": "Balance: 2,345.75 credits.",
+            "translation": "Guthaben: 2.345,75 Punkte.",
+            "source_locale": "en",
+            "target_locale": "de"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V05",
+      "group": "valid",
+      "category": "unicode",
+      "title": "Unicode decimal digits preserve value",
+      "rationale": "Arabic-Indic decimal digits represent the same integer value.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "unicode-digits",
+            "source": "There are 27 items.",
+            "translation": "يوجد ٢٧ عنصرًا.",
+            "source_locale": "en",
+            "target_locale": "ar"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V06",
+      "group": "valid",
+      "category": "html",
+      "title": "Balanced nested tags retain structure",
+      "rationale": "Only visible words change; tag identities, counts and nesting remain identical.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "nested-control",
+            "source": "<p><strong>Save</strong> the file.</p>",
+            "translation": "<p><strong>Enregistrer</strong> le fichier.</p>",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V07",
+      "group": "valid",
+      "category": "html_placeholders",
+      "title": "Attribute placeholders are retained",
+      "rationale": "The raw attribute placeholder and balanced tag are unchanged.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "attribute-token",
+            "source": "<a href=\"/users/{user_id}\">Open profile</a>",
+            "translation": "<a href=\"/users/{user_id}\">Ouvrir le profil</a>",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V08",
+      "group": "valid",
+      "category": "unicode",
+      "title": "Equivalent locale spelling and Unicode normalization",
+      "rationale": "A same-locale copy is allowed; precomposed and decomposed accents are canonically equivalent.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "same-locale",
+            "source": "Café ouvert",
+            "translation": "Café ouvert",
+            "source_locale": "fr_FR",
+            "target_locale": "fr-FR"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V09",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Escaped percent remains literal",
+      "rationale": "The percent escape is literal and the numeric quantity remains 100.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "percent-escape",
+            "source": "Progress: 100%%.",
+            "translation": "Progression : 100%%.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V10",
+      "group": "valid",
+      "category": "numbers",
+      "title": "Unicode minus and quantity reordering",
+      "rationale": "U+2212 is the supported minus sign; numeric order can change while signed values remain equal.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "signed-control",
+            "source": "Balance -5; bonus 2.",
+            "translation": "Bonus 2 ; solde −5.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V11",
+      "group": "valid",
+      "category": "serialization",
+      "title": "CSV quotes, commas and embedded newline",
+      "rationale": "CSV serialization must preserve punctuation and multiline text without creating records.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "quoted-control",
+            "source": "Choose \"Save, then close\".\nContinue editing.",
+            "translation": "Choisir « Enregistrer, puis fermer ».\nContinuer la modification.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "V12",
+      "group": "valid",
+      "category": "fields",
+      "title": "Integer zero is a valid identifier",
+      "rationale": "The identifier contract permits integer zero; it must not be treated as absent.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": 0,
+            "source": "Continue",
+            "translation": "Continuer",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "D01",
+      "group": "defective",
+      "category": "empty",
+      "title": "Whitespace-only translation",
+      "rationale": "A present but blank value is empty, not missing.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "blank",
+            "source": "Save changes",
+            "translation": " \t ",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "blank",
+            "issue_type": "empty_translation",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D02",
+      "group": "defective",
+      "category": "missing",
+      "title": "Absent translation field",
+      "rationale": "A missing key must remain distinguishable from an empty string.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "absent",
+            "source": "Save changes",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "absent",
+            "issue_type": "missing_translation",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "One repeated placeholder occurrence disappears",
+      "rationale": "A set-only comparison would miss the second required occurrence.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "repeat-loss",
+            "source": "Hello {name}; goodbye {name}.",
+            "translation": "Bonjour {name} ; au revoir.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "repeat-loss",
+            "issue_type": "missing_placeholder",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D04",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "Unexpected named placeholder",
+      "rationale": "A target-only placeholder could reference an unavailable argument.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "extra-token",
+            "source": "Welcome back",
+            "translation": "Bon retour {account_id}",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "extra-token",
+            "issue_type": "additional_placeholder",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D05",
+      "group": "defective",
+      "category": "numbers",
+      "title": "Quantity changed",
+      "rationale": "The supported integer values differ and require a warning.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "changed-count",
+            "source": "Receive 14 credits.",
+            "translation": "Recevoir 41 crédits.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "changed-count",
+            "issue_type": "numerical_inconsistency",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D06",
+      "group": "defective",
+      "category": "numbers",
+      "title": "Repeated quantity occurrence disappears",
+      "rationale": "Both occurrences of a repeated number must be compared.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "number-repeat",
+            "source": "Take 2 coins and 2 keys.",
+            "translation": "Prendre 2 pièces et des clés.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "number-repeat",
+            "issue_type": "numerical_inconsistency",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D07",
+      "group": "defective",
+      "category": "copied",
+      "title": "Copied source after Unicode normalization",
+      "rationale": "Different declared locales plus the same normalized visible words warrant copied-text review.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "normalized-copy",
+            "source": "Café status",
+            "translation": "Café status",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "normalized-copy",
+            "issue_type": "source_copied",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D08",
+      "group": "defective",
+      "category": "html",
+      "title": "Missing closing tag",
+      "rationale": "The translated fragment is unbalanced and cannot be safely compared as complete markup.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "unclosed-tag",
+            "source": "<b>Continue</b>",
+            "translation": "<b>Continuer",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "unclosed-tag",
+            "issue_type": "html_tag_mismatch",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D09",
+      "group": "defective",
+      "category": "html",
+      "title": "Formatting tag removed",
+      "rationale": "Both fragments are balanced but the source bold tag has disappeared.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "missing-tag",
+            "source": "<b>Important</b> notice",
+            "translation": "Avis important",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "missing-tag",
+            "issue_type": "missing_html_tag",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D10",
+      "group": "defective",
+      "category": "html",
+      "title": "Unexpected formatting tag",
+      "rationale": "The translated text adds a tag not present in the reference.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "extra-tag",
+            "source": "Open settings",
+            "translation": "<i>Ouvrir les paramètres</i>",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "extra-tag",
+            "issue_type": "unexpected_html_tag",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D11",
+      "group": "defective",
+      "category": "html",
+      "title": "Same tag counts, different nesting",
+      "rationale": "Tag counts alone cannot establish the same formatting structure.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "nesting-change",
+            "source": "<b><span>Continue</span></b>",
+            "translation": "<span><b>Continuer</b></span>",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "nesting-change",
+            "issue_type": "html_structure_changed",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D12",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "Implicit printf argument order changes",
+      "rationale": "Without explicit positions, changing string/integer order changes argument binding.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "implicit-order",
+            "source": "Player %s has %d lives.",
+            "translation": "Vies : %d ; joueur : %s.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "implicit-order",
+            "issue_type": "placeholder_order_mismatch",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D13",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "Numeric format precision changes",
+      "rationale": "The placeholder identity is retained but rounding precision differs.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "format-change",
+            "source": "Total {amount:.2f}",
+            "translation": "Total à payer {amount:.0f}",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "format-change",
+            "issue_type": "placeholder_format_mismatch",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D14",
+      "group": "defective",
+      "category": "fields",
+      "title": "Both identifier and source are absent",
+      "rationale": "Two separate missing fields must produce two findings and a stable fallback identifier.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "translation": "Continuer",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "row:1",
+            "issue_type": "missing_field",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "row:1",
+            "issue_type": "missing_field",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D15",
+      "group": "defective",
+      "category": "duplicates",
+      "title": "Duplicate identifiers on different rows",
+      "rationale": "Every colliding row must be identified by index; findings must not collapse by public ID.",
+      "classification": "supported_contract",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "ordinary",
+      "input": {
+        "records": [
+          {
+            "id": "shared-key",
+            "source": "Open menu",
+            "translation": "Ouvrir le menu",
+            "source_locale": "en",
+            "target_locale": "fr"
+          },
+          {
+            "id": "shared-key",
+            "source": "Close menu",
+            "translation": "Fermer le menu",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "shared-key",
+            "issue_type": "duplicate_record_id",
+            "severity": "critical"
+          },
+          {
+            "record_index": 2,
+            "record_id": "shared-key",
+            "issue_type": "duplicate_record_id",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D16",
+      "group": "defective",
+      "category": "duplicates",
+      "title": "Suspicious reuse across opposing actions",
+      "rationale": "Different source actions sharing a target in one locale require review; the heuristic does not prove linguistic error.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "approve-action",
+            "source": "Approve payment",
+            "translation": "Confirmer",
+            "source_locale": "en",
+            "target_locale": "fr"
+          },
+          {
+            "id": "cancel-action",
+            "source": "Cancel payment",
+            "translation": "Confirmer",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "approve-action",
+            "issue_type": "suspicious_translation_reuse",
+            "severity": "warning"
+          },
+          {
+            "record_index": 2,
+            "record_id": "cancel-action",
+            "issue_type": "suspicious_translation_reuse",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D17",
+      "group": "defective",
+      "category": "combined",
+      "title": "Markup, placeholder identity and quantity changed",
+      "rationale": "Independent rule families must retain all four applicable findings.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "combined",
+            "source": "<b>Order {order_id}</b> contains 3 items.",
+            "translation": "Commande {invoice_id} contenant 4 articles.",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "combined",
+            "issue_type": "missing_html_tag",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "combined",
+            "issue_type": "missing_placeholder",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "combined",
+            "issue_type": "additional_placeholder",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "combined",
+            "issue_type": "numerical_inconsistency",
+            "severity": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "D18",
+      "group": "defective",
+      "category": "fields",
+      "title": "Text values have invalid types",
+      "rationale": "Numeric source and Boolean target must not be silently coerced to strings.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "wrong-types",
+            "source": 7,
+            "translation": false,
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "wrong-types",
+            "issue_type": "invalid_field",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "wrong-types",
+            "issue_type": "invalid_field",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B01",
+      "group": "boundary",
+      "category": "malformed_records",
+      "title": "A non-object between usable neighbors",
+      "rationale": "Malformed record isolation must retain a later real missing-placeholder finding.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "neighbor-control",
+            "source": "Continue",
+            "translation": "Continuer",
+            "source_locale": "en",
+            "target_locale": "fr"
+          },
+          null,
+          {
+            "id": "later-neighbor",
+            "source": "Goodbye {user}",
+            "translation": "Au revoir",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 2,
+            "record_id": "row:2",
+            "issue_type": "invalid_record",
+            "severity": "critical"
+          },
+          {
+            "record_index": 3,
+            "record_id": "later-neighbor",
+            "issue_type": "missing_placeholder",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B02",
+      "group": "boundary",
+      "category": "fields",
+      "title": "Null target, Boolean ID and invalid locale",
+      "rationale": "Missing target and invalid metadata must be independently reported without a crash.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": false,
+            "source": "Continue",
+            "translation": null,
+            "source_locale": "en",
+            "target_locale": "fr-?"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 1,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "row:1",
+            "issue_type": "invalid_field",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "row:1",
+            "issue_type": "invalid_field",
+            "severity": "critical"
+          },
+          {
+            "record_index": 1,
+            "record_id": "row:1",
+            "issue_type": "missing_translation",
+            "severity": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B03",
+      "group": "boundary",
+      "category": "invalid_json",
+      "title": "Duplicate JSON property",
+      "rationale": "Ambiguous duplicate keys must reject the file rather than silently take the last value.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "format": "json",
+        "text": "[{\"id\":\"duplicate-key\",\"source\":\"Continue\",\"translation\":\"Continuer\",\"translation\":\"Arrêter\"}]"
+      },
+      "expected": {
+        "exit_code": 2,
+        "error_type": "input_error",
+        "issues": []
+      }
+    },
+    {
+      "id": "B04",
+      "group": "boundary",
+      "category": "invalid_csv",
+      "title": "Unterminated CSV quoted field",
+      "rationale": "An invalid file must produce structured input_error, exit 2 and no traceback.",
+      "classification": "supported_contract",
+      "formats": [
+        "csv"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "format": "csv",
+        "text": "id,source,translation\nbad,Continue,\"Continuer\n"
+      },
+      "expected": {
+        "exit_code": 2,
+        "error_type": "input_error",
+        "issues": []
+      }
+    },
+    {
+      "id": "B05",
+      "group": "boundary",
+      "category": "encoding",
+      "title": "Invalid UTF-8 byte sequence",
+      "rationale": "Invalid encoding must be rejected explicitly instead of replacing bytes silently.",
+      "classification": "supported_contract",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "format": "json",
+        "bytes_hex": "5b7b226964223a22ff227d5d"
+      },
+      "expected": {
+        "exit_code": 2,
+        "error_type": "input_error",
+        "issues": []
+      }
+    },
+    {
+      "id": "B06",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "ICU plural expression",
+      "rationale": "ICU is unsupported; an informational diagnostic should prevent a clean-result interpretation.",
+      "classification": "documented_unsupported",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "icu",
+            "source": "{count, plural, one {# item} other {# items}}",
+            "translation": "{count, plural, one {# article} other {# articles}}",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "icu",
+            "issue_type": "placeholder_syntax_unverified",
+            "severity": "informational"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B07",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "Ambiguous comma without locale metadata",
+      "rationale": "The engine must not guess whether a comma represents a decimal or grouping separator.",
+      "classification": "documented_unsupported",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "unknown-number-profile",
+            "source": "Balance 1,250",
+            "translation": "Solde 1,250"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "unknown-number-profile",
+            "issue_type": "number_format_unverified",
+            "severity": "informational"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B08",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "Unsupported object printf placeholder disappears",
+      "rationale": "README promises unverified notices for unsupported printf-like syntax. Expect a notice, not unsupported %@ token validation.",
+      "classification": "diagnostic_contract_gap",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "object-printf",
+            "source": "Hello %@",
+            "translation": "Bonjour",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "object-printf",
+            "issue_type": "placeholder_syntax_unverified",
+            "severity": "informational"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B09",
+      "group": "boundary",
+      "category": "input_size",
+      "title": "Equivalent 131073-character fields across formats",
+      "rationale": "No CSV-only size limit is documented. Identical representable text should follow a shared acceptance policy; JSON acceptance is the existing reference.",
+      "classification": "format_boundary_gap",
+      "formats": [
+        "json",
+        "csv"
+      ],
+      "parity_required": true,
+      "parity_cohort": "long_field_boundary",
+      "input": {
+        "generator": {
+          "kind": "long_fields",
+          "length": 131073,
+          "id": "long-field",
+          "source_character": "A",
+          "translation_character": "B"
+        }
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": []
+      }
+    },
+    {
+      "id": "B10",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "Script content is explicitly outside visible-text checks",
+      "rationale": "Both fragments contain unsupported script content; two notices are expected, and script numbers are not assessed.",
+      "classification": "documented_unsupported",
+      "formats": [
+        "json"
+      ],
+      "parity_required": false,
+      "parity_cohort": null,
+      "input": {
+        "records": [
+          {
+            "id": "script-profile",
+            "source": "<script>let n=1;</script><p>Ready</p>",
+            "translation": "<script>let n=2;</script><p>Prêt</p>",
+            "source_locale": "en",
+            "target_locale": "fr"
+          }
+        ]
+      },
+      "expected": {
+        "exit_code": 0,
+        "error_type": null,
+        "issues": [
+          {
+            "record_index": 1,
+            "record_id": "script-profile",
+            "issue_type": "html_content_unverified",
+            "severity": "informational"
+          },
+          {
+            "record_index": 1,
+            "record_id": "script-profile",
+            "issue_type": "html_content_unverified",
+            "severity": "informational"
+          }
+        ]
+      }
+    }
+  ]
+}

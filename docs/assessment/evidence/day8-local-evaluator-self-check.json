@@ -1,0 +1,43 @@
+{
+  "fixture_sha256": "847e74634d6ad48c49b43c72ca8b6d4b51d5840c6500c1f5e61946275f221597",
+  "frozen_fixture_preserved": true,
+  "controls": [
+    {
+      "control": "clean_control",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "detail_check": true,
+      "passed": true
+    },
+    {
+      "control": "fabricated_expected_finding_is_rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "detail_check": true,
+      "passed": true
+    },
+    {
+      "control": "wrong_severity_and_exit_are_rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "detail_check": true,
+      "passed": true
+    },
+    {
+      "control": "expected_input_rejection_is_accepted",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "detail_check": true,
+      "passed": true
+    },
+    {
+      "control": "invalid_fixture_count_is_setup_error",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "detail_check": true,
+      "passed": true
+    }
+  ],
+  "passed": 5,
+  "failed": 0
+}

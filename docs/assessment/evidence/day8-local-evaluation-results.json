@@ -1,0 +1,3119 @@
+{
+  "evaluation": "Day 8 mechanical contract challenge",
+  "schema_version": 1,
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "runtime": "C:\\Users\\MR. BRUTAL\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "commit": "5f02ae8dd33245657ad26384a0b1d8894a08dfde",
+    "started_at_utc": "2026-11-16T08:46:40.960367+00:00",
+    "finished_at_utc": "2026-11-16T08:46:52.180206+00:00"
+  },
+  "fixture_sha256": "847e74634d6ad48c49b43c72ca8b6d4b51d5840c6500c1f5e61946275f221597",
+  "runner_sha256": "0ebd75a78f5cac24c02e7c7e768a48a4a6516819dda71aa986f6f6672f60b374",
+  "engine_files_sha256": {
+    "translation_qa/__init__.py": "94e40f664c1e5cb2814eea55050232ab95e5cbfe89a77cbc1577959e1efc60c0",
+    "translation_qa/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "translation_qa/cli.py": "ad86141aa0c0d5ad0e4e94e792d371e527d1f94bec0f6b54a67ffc2bc253886c",
+    "translation_qa/duplicates.py": "8c4b91db758556010e9bafb6e2a472bb9eff0d8a1acb49070eb182e712caba46",
+    "translation_qa/fields.py": "6d7adbdd1a9daa50cdcd45a130cda573473bf5c4c6dec71531497cad26d30d54",
+    "translation_qa/loading.py": "461135a630b6c1572d4faea95aec1b11f4e1b5d439b9fa4218183fd81f4f46cf",
+    "translation_qa/markup.py": "67f18180042d4ae2121d82d99adc754f94fd39d3c9eff28c46db0f8c77582368",
+    "translation_qa/models.py": "3fabf22a02ac0f082837eb9a73015a6452c281254b38365f93bec479aedb78a0",
+    "translation_qa/reporting.py": "9ef51484532c70be53ff0ee20bc8613689d6927fda7cf197bcf00bcedc7bd60a",
+    "translation_qa/tokens.py": "4fe7820e8d1b803f6d0e8479e7f3fba5a0821739d6f77f826a43d65b9630dcd5",
+    "translation_qa/validation.py": "b701ebc4d524bebf4b3fc6f33d688fdef771e683c2302ef84e8dc8a942283145"
+  },
+  "command_template": "python -m translation_qa check <materialized-case.json-or-csv>",
+  "failure_threshold": "critical (engine default)",
+  "metric_scope": "Synthetic mechanical expectations only; no semantic accuracy or production-rate claim.",
+  "summary": {
+    "cases": 40,
+    "case_matches": 38,
+    "case_mismatches": [
+      "B08",
+      "B09"
+    ],
+    "cli_executions": 61,
+    "cli_expectation_matches": 59,
+    "by_group": {
+      "valid": {
+        "cases": 12,
+        "matched": 12
+      },
+      "defective": {
+        "cases": 18,
+        "matched": 18
+      },
+      "boundary": {
+        "cases": 10,
+        "matched": 8
+      }
+    },
+    "valid_cases_with_unexpected_findings": 0,
+    "valid_cases_with_execution_or_contract_error": 0,
+    "defective_expected_events": 25,
+    "defective_matching_events": 25,
+    "defective_missing_events": 0,
+    "defective_unexpected_events": 0,
+    "parity": {
+      "ordinary": {
+        "cases": 20,
+        "consistent": 20
+      },
+      "long_field_boundary": {
+        "cases": 1,
+        "consistent": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "V01",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Named arguments may move",
+      "rationale": "Reordering named placeholders preserves binding; both identities and counts are unchanged.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 170,
+          "input_sha256": "b6b156fd399e72b29f746af432d16b1a4864807775ebd515c7c6e2aa42fbc2ae",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V01.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 139,
+          "input_sha256": "9488391417d5f256e095f1828ffd0e5a429e558a8145432d6f89d82732d8bd2b",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V01.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V02",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Template whitespace and repeated occurrences",
+      "rationale": "Whitespace inside supported double-brace names is insignificant; both repeated occurrences remain.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 201,
+          "input_sha256": "6cd002a14ecf9ad27ca9fa59511dce43a943cd351f0352acb234ff8539c457ba",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V02.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 168,
+          "input_sha256": "4b5fa703bef324147a9cb96cf4547f7b09ac77fd877c1d922f09274961d71e92",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V02.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V03",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Explicit printf positions may move",
+      "rationale": "Explicit argument positions allow word-order changes without rebinding.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 171,
+          "input_sha256": "ee81c1b24075cbe6b9d2ac8d788f8f903a10f24792e734a470316678a6f19926",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V03.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 138,
+          "input_sha256": "c9f428f9113e87196e82209a7523c3b7f782b69bffc4980c155e324211f61fa6",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V03.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V04",
+      "group": "valid",
+      "category": "numbers",
+      "title": "Declared German grouping and decimals",
+      "rationale": "The supported en/de profiles represent the same decimal quantity with different separators.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 157,
+          "input_sha256": "3e631f1d837706c51c83313e8f2be7e4969c58c5703745189aa3cb9b82f6fb64",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V04.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 128,
+          "input_sha256": "ccddaf85d7da228531fc0d62c747d34b7b507dc7cf31ea73ab99f96df6430525",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V04.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V05",
+      "group": "valid",
+      "category": "unicode",
+      "title": "Unicode decimal digits preserve value",
+      "rationale": "Arabic-Indic decimal digits represent the same integer value.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 152,
+          "input_sha256": "c8d397bdbf1b18f1010379a5ef95b1ed9e7504966dc88d328f73a805651465cd",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V05.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 119,
+          "input_sha256": "2200af0a1cc6e5574e5c76088f27fe9484cca216df4bb12af006c7d068cb92df",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V05.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V06",
+      "group": "valid",
+      "category": "html",
+      "title": "Balanced nested tags retain structure",
+      "rationale": "Only visible words change; tag identities, counts and nesting remain identical.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 191,
+          "input_sha256": "9c03498e8108d1451713498bb54669e350e93f7ac4fbe9aa5cf9322fd5d19aa2",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V06.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 158,
+          "input_sha256": "4c25b8c33ed45e779f4f7cf4691441d9332064d4e1cf7bebadde7fac1be304e0",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V06.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V07",
+      "group": "valid",
+      "category": "html_placeholders",
+      "title": "Attribute placeholders are retained",
+      "rationale": "The raw attribute placeholder and balanced tag are unchanged.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 201,
+          "input_sha256": "65c36f2faf615c16f1c8a7a83c98e29a2be7673ceb21a253839824606bc195d4",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V07.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 172,
+          "input_sha256": "e464c38e8f363678dc79d58d08c6a10325b293e707df81fda7041e038ab7b035",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V07.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V08",
+      "group": "valid",
+      "category": "unicode",
+      "title": "Equivalent locale spelling and Unicode normalization",
+      "rationale": "A same-locale copy is allowed; precomposed and decomposed accents are canonically equivalent.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 134,
+          "input_sha256": "6024546599e4bb956adad3e5973b3cb64a4300272e3ecb1700180386e5e7d876",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V08.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 101,
+          "input_sha256": "380b4cbb0b4c399b1fb4eb7aef6d2f9210d3efea27c6a54dd635f6e78d230a7a",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V08.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V09",
+      "group": "valid",
+      "category": "placeholders",
+      "title": "Escaped percent remains literal",
+      "rationale": "The percent escape is literal and the numeric quantity remains 100.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 142,
+          "input_sha256": "77d38ec9e67f62d044fc0c4a4413124672f7eeafdacac1bfc1601d8f01a7c7a4",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V09.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 109,
+          "input_sha256": "e9243229296ce684834c6337bfb39dbf84429361da4213944ccd8e287100b470",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V09.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V10",
+      "group": "valid",
+      "category": "numbers",
+      "title": "Unicode minus and quantity reordering",
+      "rationale": "U+2212 is the supported minus sign; numeric order can change while signed values remain equal.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 147,
+          "input_sha256": "a7b1dff444921404a56c8ad8406cc8d4ec468fa468aa66468b5709ed5e6e6a6c",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V10.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 114,
+          "input_sha256": "1f168186d26b9b2cff59ae43a546a9049e48efd5719fbdd26e544afaac06520c",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V10.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V11",
+      "group": "valid",
+      "category": "serialization",
+      "title": "CSV quotes, commas and embedded newline",
+      "rationale": "CSV serialization must preserve punctuation and multiline text without creating records.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 220,
+          "input_sha256": "5bd091532c36244c77d63a5c5d9b3932438cb73dea88f26f79638a8f2a468432",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V11.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 189,
+          "input_sha256": "eea85b1a65a79a243e382e06d66c06e7363fb4bf4d6e8483b857332dca804732",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V11.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "V12",
+      "group": "valid",
+      "category": "fields",
+      "title": "Integer zero is a valid identifier",
+      "rationale": "The identifier contract permits integer zero; it must not be treated as absent.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 108,
+          "input_sha256": "be348f51a3def7e46b11425fb2a2e5e8b51625e2df5d7720f5cbedf5a7c7e625",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"V12.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D01",
+      "group": "defective",
+      "category": "empty",
+      "title": "Whitespace-only translation",
+      "rationale": "A present but blank value is empty, not missing.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 113,
+          "input_sha256": "ab9fc122ef5a6355111a15d998b54b7540da56258e7968c7a666c89d332bad26",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "blank",
+                "issue_type": "empty_translation",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "blank",
+              "record_index": 1,
+              "issue_type": "empty_translation",
+              "description": "Translation is empty or contains only whitespace.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D01.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"blank\",\n      \"record_index\": 1,\n      \"issue_type\": \"empty_translation\",\n      \"description\": \"Translation is empty or contains only whitespace.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 79,
+          "input_sha256": "d2f07d9482a6d4b0f36fd6b046597daa9986b8c69c10be141dd7633dbbde696d",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "blank",
+                "issue_type": "empty_translation",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "blank",
+              "record_index": 1,
+              "issue_type": "empty_translation",
+              "description": "Translation is empty or contains only whitespace.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D01.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"blank\",\n      \"record_index\": 1,\n      \"issue_type\": \"empty_translation\",\n      \"description\": \"Translation is empty or contains only whitespace.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D02",
+      "group": "defective",
+      "category": "missing",
+      "title": "Absent translation field",
+      "rationale": "A missing key must remain distinguishable from an empty string.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 91,
+          "input_sha256": "9a3a8d462a282f8045f4f111d8ba2c3be0a92f918b5da651a9cb6ef78c69f1c3",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "absent",
+                "issue_type": "missing_translation",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "absent",
+              "record_index": 1,
+              "issue_type": "missing_translation",
+              "description": "Translation field is absent or null.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D02.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"absent\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_translation\",\n      \"description\": \"Translation field is absent or null.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D03",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "One repeated placeholder occurrence disappears",
+      "rationale": "A set-only comparison would miss the second required occurrence.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 159,
+          "input_sha256": "4cfc484cf574974db3e0919775f2a1cfdaabf79bc06db795c05a0cb0485dd6c0",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "repeat-loss",
+                "issue_type": "missing_placeholder",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "repeat-loss",
+              "record_index": 1,
+              "issue_type": "missing_placeholder",
+              "description": "Translation is missing placeholder occurrences: {name} (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D03.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"repeat-loss\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_placeholder\",\n      \"description\": \"Translation is missing placeholder occurrences: {name} (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 126,
+          "input_sha256": "57f6ca9d8cb8da3b889ee1ce2b2842f639e422beea0aaddbee076307f20e12f2",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "repeat-loss",
+                "issue_type": "missing_placeholder",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "repeat-loss",
+              "record_index": 1,
+              "issue_type": "missing_placeholder",
+              "description": "Translation is missing placeholder occurrences: {name} (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D03.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"repeat-loss\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_placeholder\",\n      \"description\": \"Translation is missing placeholder occurrences: {name} (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D04",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "Unexpected named placeholder",
+      "rationale": "A target-only placeholder could reference an unavailable argument.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 138,
+          "input_sha256": "e916ad6c456abd540ec4c92ff3a13a8c6fb4327406a97ed1b5dde05f7e3d12b9",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "extra-token",
+                "issue_type": "additional_placeholder",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "extra-token",
+              "record_index": 1,
+              "issue_type": "additional_placeholder",
+              "description": "Translation contains unexpected placeholder occurrences: {account_id} (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D04.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"extra-token\",\n      \"record_index\": 1,\n      \"issue_type\": \"additional_placeholder\",\n      \"description\": \"Translation contains unexpected placeholder occurrences: {account_id} (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 105,
+          "input_sha256": "84a94e862030680f1b82763d5075cbcd01a715d58d7563fe80b826f06c484bc4",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "extra-token",
+                "issue_type": "additional_placeholder",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "extra-token",
+              "record_index": 1,
+              "issue_type": "additional_placeholder",
+              "description": "Translation contains unexpected placeholder occurrences: {account_id} (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D04.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"extra-token\",\n      \"record_index\": 1,\n      \"issue_type\": \"additional_placeholder\",\n      \"description\": \"Translation contains unexpected placeholder occurrences: {account_id} (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D05",
+      "group": "defective",
+      "category": "numbers",
+      "title": "Quantity changed",
+      "rationale": "The supported integer values differ and require a warning.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 145,
+          "input_sha256": "728d91713d65daf1c9181c80146f20e93e687d4db0e979323a7dd53322d47f97",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "changed-count",
+                "issue_type": "numerical_inconsistency",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "changed-count",
+              "record_index": 1,
+              "issue_type": "numerical_inconsistency",
+              "description": "Numeric values or occurrence counts differ. Source: [14 (count 1)]; translation: [41 (count 1)]. Review whether the change is intentional.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D05.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"changed-count\",\n      \"record_index\": 1,\n      \"issue_type\": \"numerical_inconsistency\",\n      \"description\": \"Numeric values or occurrence counts differ. Source: [14 (count 1)]; translation: [41 (count 1)]. Review whether the change is intentional.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 112,
+          "input_sha256": "ccd5a63e7ad5faa125dc5f603f606723d7bb842f68e5e941e57af409e25fdd4a",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "changed-count",
+                "issue_type": "numerical_inconsistency",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "changed-count",
+              "record_index": 1,
+              "issue_type": "numerical_inconsistency",
+              "description": "Numeric values or occurrence counts differ. Source: [14 (count 1)]; translation: [41 (count 1)]. Review whether the change is intentional.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D05.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"changed-count\",\n      \"record_index\": 1,\n      \"issue_type\": \"numerical_inconsistency\",\n      \"description\": \"Numeric values or occurrence counts differ. Source: [14 (count 1)]; translation: [41 (count 1)]. Review whether the change is intentional.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D06",
+      "group": "defective",
+      "category": "numbers",
+      "title": "Repeated quantity occurrence disappears",
+      "rationale": "Both occurrences of a repeated number must be compared.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 160,
+          "input_sha256": "183c9b6088af62f9f5ce9839ae0dec94da508e0bc73d321ec29f9b793077032d",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "number-repeat",
+                "issue_type": "numerical_inconsistency",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "number-repeat",
+              "record_index": 1,
+              "issue_type": "numerical_inconsistency",
+              "description": "Numeric values or occurrence counts differ. Source: [2 (count 2)]; translation: [2 (count 1)]. Review whether the change is intentional.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D06.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"number-repeat\",\n      \"record_index\": 1,\n      \"issue_type\": \"numerical_inconsistency\",\n      \"description\": \"Numeric values or occurrence counts differ. Source: [2 (count 2)]; translation: [2 (count 1)]. Review whether the change is intentional.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 127,
+          "input_sha256": "d2446efaab31f368e6d43067f28cd35b830b620aa9b520e970cf4e66b86a17c0",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "number-repeat",
+                "issue_type": "numerical_inconsistency",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "number-repeat",
+              "record_index": 1,
+              "issue_type": "numerical_inconsistency",
+              "description": "Numeric values or occurrence counts differ. Source: [2 (count 2)]; translation: [2 (count 1)]. Review whether the change is intentional.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D06.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"number-repeat\",\n      \"record_index\": 1,\n      \"issue_type\": \"numerical_inconsistency\",\n      \"description\": \"Numeric values or occurrence counts differ. Source: [2 (count 2)]; translation: [2 (count 1)]. Review whether the change is intentional.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D07",
+      "group": "defective",
+      "category": "copied",
+      "title": "Copied source after Unicode normalization",
+      "rationale": "Different declared locales plus the same normalized visible words warrant copied-text review.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 132,
+          "input_sha256": "ae31afbc8ac86b944ffbb6aa0a22a6aaa9d00a6af8111180424abe2bd75dd108",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "normalized-copy",
+                "issue_type": "source_copied",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "normalized-copy",
+              "record_index": 1,
+              "issue_type": "source_copied",
+              "description": "Visible translation matches the source after Unicode and whitespace normalization. Names, brands, and shared words may be valid exceptions.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D07.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"normalized-copy\",\n      \"record_index\": 1,\n      \"issue_type\": \"source_copied\",\n      \"description\": \"Visible translation matches the source after Unicode and whitespace normalization. Names, brands, and shared words may be valid exceptions.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 99,
+          "input_sha256": "b0c3031b6bb6c2cb6a5d7a30ece4eaee6b7156585b7bc25da41d154562bee5cd",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "normalized-copy",
+                "issue_type": "source_copied",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "normalized-copy",
+              "record_index": 1,
+              "issue_type": "source_copied",
+              "description": "Visible translation matches the source after Unicode and whitespace normalization. Names, brands, and shared words may be valid exceptions.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D07.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"normalized-copy\",\n      \"record_index\": 1,\n      \"issue_type\": \"source_copied\",\n      \"description\": \"Visible translation matches the source after Unicode and whitespace normalization. Names, brands, and shared words may be valid exceptions.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D08",
+      "group": "defective",
+      "category": "html",
+      "title": "Missing closing tag",
+      "rationale": "The translated fragment is unbalanced and cannot be safely compared as complete markup.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 131,
+          "input_sha256": "17ee5f24a5273f4fb38cdc5e13acb028217677bd8f0f78f561d050fb2d345fcc",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "unclosed-tag",
+                "issue_type": "html_tag_mismatch",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "unclosed-tag",
+              "record_index": 1,
+              "issue_type": "html_tag_mismatch",
+              "description": "Translation fragment: Unclosed tags: b.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D08.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"unclosed-tag\",\n      \"record_index\": 1,\n      \"issue_type\": \"html_tag_mismatch\",\n      \"description\": \"Translation fragment: Unclosed tags: b.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D09",
+      "group": "defective",
+      "category": "html",
+      "title": "Formatting tag removed",
+      "rationale": "Both fragments are balanced but the source bold tag has disappeared.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 140,
+          "input_sha256": "313f40d80b3199fbe8d9633c8f072423b5b293e85479f01330fa6a5ad287f776",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "missing-tag",
+                "issue_type": "missing_html_tag",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "missing-tag",
+              "record_index": 1,
+              "issue_type": "missing_html_tag",
+              "description": "Translation is missing tag occurrences: <b> (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D09.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"missing-tag\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_html_tag\",\n      \"description\": \"Translation is missing tag occurrences: <b> (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 107,
+          "input_sha256": "d028307d5d46e3ed38ad9c42c4739f600b7b9a207f4c7d233b8581f1e72906ed",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "missing-tag",
+                "issue_type": "missing_html_tag",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "missing-tag",
+              "record_index": 1,
+              "issue_type": "missing_html_tag",
+              "description": "Translation is missing tag occurrences: <b> (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D09.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"missing-tag\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_html_tag\",\n      \"description\": \"Translation is missing tag occurrences: <b> (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D10",
+      "group": "defective",
+      "category": "html",
+      "title": "Unexpected formatting tag",
+      "rationale": "The translated text adds a tag not present in the reference.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 143,
+          "input_sha256": "85c27cb703cc29cfb06e3cddb8e7b25357128b2a30b8ddf5bf216daf1834bcc8",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "extra-tag",
+                "issue_type": "unexpected_html_tag",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "extra-tag",
+              "record_index": 1,
+              "issue_type": "unexpected_html_tag",
+              "description": "Translation adds tag occurrences: <i> (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D10.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"extra-tag\",\n      \"record_index\": 1,\n      \"issue_type\": \"unexpected_html_tag\",\n      \"description\": \"Translation adds tag occurrences: <i> (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 110,
+          "input_sha256": "bbd2c9564ac3a8dc458bba4ba96b5a18804892f242adf31c7c790a9a05f4f1d6",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "extra-tag",
+                "issue_type": "unexpected_html_tag",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "extra-tag",
+              "record_index": 1,
+              "issue_type": "unexpected_html_tag",
+              "description": "Translation adds tag occurrences: <i> (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D10.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"extra-tag\",\n      \"record_index\": 1,\n      \"issue_type\": \"unexpected_html_tag\",\n      \"description\": \"Translation adds tag occurrences: <i> (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D11",
+      "group": "defective",
+      "category": "html",
+      "title": "Same tag counts, different nesting",
+      "rationale": "Tag counts alone cannot establish the same formatting structure.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 163,
+          "input_sha256": "fbeccf0823895a7a7c7dd2360b96eb08540f8a1d88d11587a3b9385ed21648c6",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "nesting-change",
+                "issue_type": "html_structure_changed",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "nesting-change",
+              "record_index": 1,
+              "issue_type": "html_structure_changed",
+              "description": "Tag counts match but nesting differs; review whether the formatting change is intentional.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D11.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"nesting-change\",\n      \"record_index\": 1,\n      \"issue_type\": \"html_structure_changed\",\n      \"description\": \"Tag counts match but nesting differs; review whether the formatting change is intentional.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D12",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "Implicit printf argument order changes",
+      "rationale": "Without explicit positions, changing string/integer order changes argument binding.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 153,
+          "input_sha256": "0b8c31355c228ca7279965ca9ced9d6d924c5b6daff11ade412eae8797eccc4e",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "implicit-order",
+                "issue_type": "placeholder_order_mismatch",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "implicit-order",
+              "record_index": 1,
+              "issue_type": "placeholder_order_mismatch",
+              "description": "Unnumbered printf argument types changed order, which can change argument binding. Use matching order or supported explicit positions.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D12.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"implicit-order\",\n      \"record_index\": 1,\n      \"issue_type\": \"placeholder_order_mismatch\",\n      \"description\": \"Unnumbered printf argument types changed order, which can change argument binding. Use matching order or supported explicit positions.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D13",
+      "group": "defective",
+      "category": "placeholders",
+      "title": "Numeric format precision changes",
+      "rationale": "The placeholder identity is retained but rounding precision differs.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 150,
+          "input_sha256": "f2d4ddf75a721dd913e8931cd066342fa308e94969afa402ca33b2de3c8d0ae5",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "format-change",
+                "issue_type": "placeholder_format_mismatch",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "format-change",
+              "record_index": 1,
+              "issue_type": "placeholder_format_mismatch",
+              "description": "Placeholder identities/counts match but conversion, width, or format modifiers differ; review the intended formatting.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D13.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"format-change\",\n      \"record_index\": 1,\n      \"issue_type\": \"placeholder_format_mismatch\",\n      \"description\": \"Placeholder identities/counts match but conversion, width, or format modifiers differ; review the intended formatting.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D14",
+      "group": "defective",
+      "category": "fields",
+      "title": "Both identifier and source are absent",
+      "rationale": "Two separate missing fields must produce two findings and a stable fallback identifier.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 54,
+          "input_sha256": "bfa51e4586c8e9b8c1f0d1719d241ec3efb07e93a263a35231b90cda53dd91e2",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "row:1",
+                "issue_type": "missing_field",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "row:1",
+                "issue_type": "missing_field",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "row:1",
+              "record_index": 1,
+              "issue_type": "missing_field",
+              "description": "Required field 'id' is absent; a row identifier was assigned.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "row:1",
+              "record_index": 1,
+              "issue_type": "missing_field",
+              "description": "Required field 'source' is absent or null.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D14.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"row:1\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_field\",\n      \"description\": \"Required field 'id' is absent; a row identifier was assigned.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"row:1\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_field\",\n      \"description\": \"Required field 'source' is absent or null.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D15",
+      "group": "defective",
+      "category": "duplicates",
+      "title": "Duplicate identifiers on different rows",
+      "rationale": "Every colliding row must be identified by index; findings must not collapse by public ID.",
+      "classification": "supported_contract",
+      "parity_cohort": "ordinary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 250,
+          "input_sha256": "31a7f90a35bbcc39bf565a4830762118a735ce792dff3a3aa03ff2f79bc808fb",
+          "expected_records": 2,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "shared-key",
+                "issue_type": "duplicate_record_id",
+                "severity": "critical"
+              },
+              {
+                "record_index": 2,
+                "record_id": "shared-key",
+                "issue_type": "duplicate_record_id",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "shared-key",
+              "record_index": 1,
+              "issue_type": "duplicate_record_id",
+              "description": "Identifier is shared by 2 input records; use record_index to locate each occurrence.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "shared-key",
+              "record_index": 2,
+              "issue_type": "duplicate_record_id",
+              "description": "Identifier is shared by 2 input records; use record_index to locate each occurrence.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D15.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 2,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"shared-key\",\n      \"record_index\": 1,\n      \"issue_type\": \"duplicate_record_id\",\n      \"description\": \"Identifier is shared by 2 input records; use record_index to locate each occurrence.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"shared-key\",\n      \"record_index\": 2,\n      \"issue_type\": \"duplicate_record_id\",\n      \"description\": \"Identifier is shared by 2 input records; use record_index to locate each occurrence.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 2,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 135,
+          "input_sha256": "26398a4addab8b246254a5415dea0ad4c4331e350aae0c3b513ae110cb4195d8",
+          "expected_records": 2,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "shared-key",
+                "issue_type": "duplicate_record_id",
+                "severity": "critical"
+              },
+              {
+                "record_index": 2,
+                "record_id": "shared-key",
+                "issue_type": "duplicate_record_id",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "shared-key",
+              "record_index": 1,
+              "issue_type": "duplicate_record_id",
+              "description": "Identifier is shared by 2 input records; use record_index to locate each occurrence.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "shared-key",
+              "record_index": 2,
+              "issue_type": "duplicate_record_id",
+              "description": "Identifier is shared by 2 input records; use record_index to locate each occurrence.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D15.csv\",\n  \"input_format\": \"csv\",\n  \"records_analyzed\": 2,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"shared-key\",\n      \"record_index\": 1,\n      \"issue_type\": \"duplicate_record_id\",\n      \"description\": \"Identifier is shared by 2 input records; use record_index to locate each occurrence.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"shared-key\",\n      \"record_index\": 2,\n      \"issue_type\": \"duplicate_record_id\",\n      \"description\": \"Identifier is shared by 2 input records; use record_index to locate each occurrence.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 2,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": true,
+      "matched": true
+    },
+    {
+      "id": "D16",
+      "group": "defective",
+      "category": "duplicates",
+      "title": "Suspicious reuse across opposing actions",
+      "rationale": "Different source actions sharing a target in one locale require review; the heuristic does not prove linguistic error.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 257,
+          "input_sha256": "fc06120c5b15b9266ad9703e99d0adb626d1e4f03cc497f197f38fd861a56113",
+          "expected_records": 2,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "approve-action",
+                "issue_type": "suspicious_translation_reuse",
+                "severity": "warning"
+              },
+              {
+                "record_index": 2,
+                "record_id": "cancel-action",
+                "issue_type": "suspicious_translation_reuse",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "approve-action",
+              "record_index": 1,
+              "issue_type": "suspicious_translation_reuse",
+              "description": "The same visible translation is used for 2 distinct source texts in target locale 'fr'. Review context; this may be valid.",
+              "severity": "warning"
+            },
+            {
+              "record_id": "cancel-action",
+              "record_index": 2,
+              "issue_type": "suspicious_translation_reuse",
+              "description": "The same visible translation is used for 2 distinct source texts in target locale 'fr'. Review context; this may be valid.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D16.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 2,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"approve-action\",\n      \"record_index\": 1,\n      \"issue_type\": \"suspicious_translation_reuse\",\n      \"description\": \"The same visible translation is used for 2 distinct source texts in target locale 'fr'. Review context; this may be valid.\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"record_id\": \"cancel-action\",\n      \"record_index\": 2,\n      \"issue_type\": \"suspicious_translation_reuse\",\n      \"description\": \"The same visible translation is used for 2 distinct source texts in target locale 'fr'. Review context; this may be valid.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 2,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D17",
+      "group": "defective",
+      "category": "combined",
+      "title": "Markup, placeholder identity and quantity changed",
+      "rationale": "Independent rule families must retain all four applicable findings.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 184,
+          "input_sha256": "3c7c2810caa1d5626c79b7a4e7d2b3e34fe3f8cae30b52dae8bf92bf23a4767d",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "combined",
+                "issue_type": "missing_html_tag",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "combined",
+                "issue_type": "missing_placeholder",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "combined",
+                "issue_type": "additional_placeholder",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "combined",
+                "issue_type": "numerical_inconsistency",
+                "severity": "warning"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "combined",
+              "record_index": 1,
+              "issue_type": "missing_html_tag",
+              "description": "Translation is missing tag occurrences: <b> (count 1).",
+              "severity": "critical"
+            },
+            {
+              "record_id": "combined",
+              "record_index": 1,
+              "issue_type": "missing_placeholder",
+              "description": "Translation is missing placeholder occurrences: {order_id} (count 1).",
+              "severity": "critical"
+            },
+            {
+              "record_id": "combined",
+              "record_index": 1,
+              "issue_type": "additional_placeholder",
+              "description": "Translation contains unexpected placeholder occurrences: {invoice_id} (count 1).",
+              "severity": "critical"
+            },
+            {
+              "record_id": "combined",
+              "record_index": 1,
+              "issue_type": "numerical_inconsistency",
+              "description": "Numeric values or occurrence counts differ. Source: [3 (count 1)]; translation: [4 (count 1)]. Review whether the change is intentional.",
+              "severity": "warning"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D17.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 4,\n  \"issues\": [\n    {\n      \"record_id\": \"combined\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_html_tag\",\n      \"description\": \"Translation is missing tag occurrences: <b> (count 1).\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"combined\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_placeholder\",\n      \"description\": \"Translation is missing placeholder occurrences: {order_id} (count 1).\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"combined\",\n      \"record_index\": 1,\n      \"issue_type\": \"additional_placeholder\",\n      \"description\": \"Translation contains unexpected placeholder occurrences: {invoice_id} (count 1).\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"combined\",\n      \"record_index\": 1,\n      \"issue_type\": \"numerical_inconsistency\",\n      \"description\": \"Numeric values or occurrence counts differ. Source: [3 (count 1)]; translation: [4 (count 1)]. Review whether the change is intentional.\",\n      \"severity\": \"warning\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "D18",
+      "group": "defective",
+      "category": "fields",
+      "title": "Text values have invalid types",
+      "rationale": "Numeric source and Boolean target must not be silently coerced to strings.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 105,
+          "input_sha256": "a5835cff816fb9010d598ae7c77e437946016cda1e6eee0a4e43e44f9185dbc8",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "wrong-types",
+                "issue_type": "invalid_field",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "wrong-types",
+                "issue_type": "invalid_field",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "wrong-types",
+              "record_index": 1,
+              "issue_type": "invalid_field",
+              "description": "Field 'source' must be a non-blank string.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "wrong-types",
+              "record_index": 1,
+              "issue_type": "invalid_field",
+              "description": "Field 'translation' must be a string; its value was not coerced.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"D18.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"wrong-types\",\n      \"record_index\": 1,\n      \"issue_type\": \"invalid_field\",\n      \"description\": \"Field 'source' must be a non-blank string.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"wrong-types\",\n      \"record_index\": 1,\n      \"issue_type\": \"invalid_field\",\n      \"description\": \"Field 'translation' must be a string; its value was not coerced.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B01",
+      "group": "boundary",
+      "category": "malformed_records",
+      "title": "A non-object between usable neighbors",
+      "rationale": "Malformed record isolation must retain a later real missing-placeholder finding.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 259,
+          "input_sha256": "4450469b6a287a05d2fe7e21b06669451ba242fc2244972a5a4c181035fae9ce",
+          "expected_records": 3,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 2,
+                "record_id": "row:2",
+                "issue_type": "invalid_record",
+                "severity": "critical"
+              },
+              {
+                "record_index": 3,
+                "record_id": "later-neighbor",
+                "issue_type": "missing_placeholder",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "row:2",
+              "record_index": 2,
+              "issue_type": "invalid_record",
+              "description": "Record must be an object containing id, source, and translation fields.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "later-neighbor",
+              "record_index": 3,
+              "issue_type": "missing_placeholder",
+              "description": "Translation is missing placeholder occurrences: {user} (count 1).",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B01.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 3,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"row:2\",\n      \"record_index\": 2,\n      \"issue_type\": \"invalid_record\",\n      \"description\": \"Record must be an object containing id, source, and translation fields.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"later-neighbor\",\n      \"record_index\": 3,\n      \"issue_type\": \"missing_placeholder\",\n      \"description\": \"Translation is missing placeholder occurrences: {user} (count 1).\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 3,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B02",
+      "group": "boundary",
+      "category": "fields",
+      "title": "Null target, Boolean ID and invalid locale",
+      "rationale": "Missing target and invalid metadata must be independently reported without a crash.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 107,
+          "input_sha256": "0b3092eb60714eeb7d4ad4b03c648329512d30337566cbf0f03dab3ebd30991b",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 1,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "row:1",
+                "issue_type": "invalid_field",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "row:1",
+                "issue_type": "invalid_field",
+                "severity": "critical"
+              },
+              {
+                "record_index": 1,
+                "record_id": "row:1",
+                "issue_type": "missing_translation",
+                "severity": "critical"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "row:1",
+              "record_index": 1,
+              "issue_type": "invalid_field",
+              "description": "Field 'id' must be a non-blank string or an integer; a row identifier was assigned.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "row:1",
+              "record_index": 1,
+              "issue_type": "invalid_field",
+              "description": "Optional field 'target_locale' must be a locale string such as en or fr-FR, or be unspecified. Numeric comparison was skipped.",
+              "severity": "critical"
+            },
+            {
+              "record_id": "row:1",
+              "record_index": 1,
+              "issue_type": "missing_translation",
+              "description": "Translation field is absent or null.",
+              "severity": "critical"
+            }
+          ],
+          "exit_code": 1,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B02.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 3,\n  \"issues\": [\n    {\n      \"record_id\": \"row:1\",\n      \"record_index\": 1,\n      \"issue_type\": \"invalid_field\",\n      \"description\": \"Field 'id' must be a non-blank string or an integer; a row identifier was assigned.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"row:1\",\n      \"record_index\": 1,\n      \"issue_type\": \"invalid_field\",\n      \"description\": \"Optional field 'target_locale' must be a locale string such as en or fr-FR, or be unspecified. Numeric comparison was skipped.\",\n      \"severity\": \"critical\"\n    },\n    {\n      \"record_id\": \"row:1\",\n      \"record_index\": 1,\n      \"issue_type\": \"missing_translation\",\n      \"description\": \"Translation field is absent or null.\",\n      \"severity\": \"critical\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B03",
+      "group": "boundary",
+      "category": "invalid_json",
+      "title": "Duplicate JSON property",
+      "rationale": "Ambiguous duplicate keys must reject the file rather than silently take the last value.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 95,
+          "input_sha256": "f1f63649d99809edd4bfaf616e54f8cf7b7fb292236c06dfccdafdfcad560737",
+          "expected_records": null,
+          "expected": {
+            "exit_code": 2,
+            "error_type": "input_error",
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "expected_error": true,
+            "error_channel": true,
+            "message_present": true
+          },
+          "actual_issues": [],
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "{\"error\": \"input_error\", \"message\": \"Duplicate JSON object field: 'translation'\"}\n",
+          "actual_error_type": "input_error",
+          "records_analyzed": null,
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B04",
+      "group": "boundary",
+      "category": "invalid_csv",
+      "title": "Unterminated CSV quoted field",
+      "rationale": "An invalid file must produce structured input_error, exit 2 and no traceback.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "csv",
+          "input_bytes": 46,
+          "input_sha256": "e1a0f40038985b78d1b1fec272949f3d345964f977803ce92766cdb0958f1927",
+          "expected_records": null,
+          "expected": {
+            "exit_code": 2,
+            "error_type": "input_error",
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "expected_error": true,
+            "error_channel": true,
+            "message_present": true
+          },
+          "actual_issues": [],
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "{\"error\": \"input_error\", \"message\": \"Cannot load B04.csv: unexpected end of data\"}\n",
+          "actual_error_type": "input_error",
+          "records_analyzed": null,
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B05",
+      "group": "boundary",
+      "category": "encoding",
+      "title": "Invalid UTF-8 byte sequence",
+      "rationale": "Invalid encoding must be rejected explicitly instead of replacing bytes silently.",
+      "classification": "supported_contract",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 12,
+          "input_sha256": "5a3a3cb676adbcabc3ef3518496c5dc470f078b9b9eada587e05188f5b065794",
+          "expected_records": null,
+          "expected": {
+            "exit_code": 2,
+            "error_type": "input_error",
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "expected_error": true,
+            "error_channel": true,
+            "message_present": true
+          },
+          "actual_issues": [],
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "{\"error\": \"input_error\", \"message\": \"Cannot load B05.json: 'utf-8' codec can't decode byte 0xff in position 8: invalid start byte\"}\n",
+          "actual_error_type": "input_error",
+          "records_analyzed": null,
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B06",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "ICU plural expression",
+      "rationale": "ICU is unsupported; an informational diagnostic should prevent a clean-result interpretation.",
+      "classification": "documented_unsupported",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 191,
+          "input_sha256": "540b28442701c1741eb34b7cb95785ba826884dddf9c5f8d5db297021d48b381",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "icu",
+                "issue_type": "placeholder_syntax_unverified",
+                "severity": "informational"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "icu",
+              "record_index": 1,
+              "issue_type": "placeholder_syntax_unverified",
+              "description": "A placeholder expression is unsupported or unbalanced. Placeholder and numeric comparisons were skipped for this record.",
+              "severity": "informational"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B06.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"icu\",\n      \"record_index\": 1,\n      \"issue_type\": \"placeholder_syntax_unverified\",\n      \"description\": \"A placeholder expression is unsupported or unbalanced. Placeholder and numeric comparisons were skipped for this record.\",\n      \"severity\": \"informational\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B07",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "Ambiguous comma without locale metadata",
+      "rationale": "The engine must not guess whether a comma represents a decimal or grouping separator.",
+      "classification": "documented_unsupported",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 92,
+          "input_sha256": "5c37b1f6fd2fa52d153747003a50fa810f97da7a37fd89e64e2a7a273929936d",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "unknown-number-profile",
+                "issue_type": "number_format_unverified",
+                "severity": "informational"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "unknown-number-profile",
+              "record_index": 1,
+              "issue_type": "number_format_unverified",
+              "description": "Numeric formatting is outside the supported profile. Numeric comparison was skipped; review the values manually.",
+              "severity": "informational"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B07.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 1,\n  \"issues\": [\n    {\n      \"record_id\": \"unknown-number-profile\",\n      \"record_index\": 1,\n      \"issue_type\": \"number_format_unverified\",\n      \"description\": \"Numeric formatting is outside the supported profile. Numeric comparison was skipped; review the values manually.\",\n      \"severity\": \"informational\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    },
+    {
+      "id": "B08",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "Unsupported object printf placeholder disappears",
+      "rationale": "README promises unverified notices for unsupported printf-like syntax. Expect a notice, not unsupported %@ token validation.",
+      "classification": "diagnostic_contract_gap",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 120,
+          "input_sha256": "b972af3474edb0b5414620f737a076db4c877b1b2ef814a75833ecb9599632b3",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "object-printf",
+                "issue_type": "placeholder_syntax_unverified",
+                "severity": "informational"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": false
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B08.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [
+            {
+              "record_index": 1,
+              "record_id": "object-printf",
+              "issue_type": "placeholder_syntax_unverified",
+              "severity": "informational",
+              "count": 1
+            }
+          ],
+          "unexpected_events": [],
+          "matched": false
+        }
+      ],
+      "parity_match": null,
+      "matched": false
+    },
+    {
+      "id": "B09",
+      "group": "boundary",
+      "category": "input_size",
+      "title": "Equivalent 131073-character fields across formats",
+      "rationale": "No CSV-only size limit is documented. Identical representable text should follow a shared acceptance policy; JSON acceptance is the existing reference.",
+      "classification": "format_boundary_gap",
+      "parity_cohort": "long_field_boundary",
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 262248,
+          "input_sha256": "442880a19788caf62aa9395a7f9a273ba4228139068193a9cd3bb47a6e8b5bd6",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B09.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 0,\n  \"issues\": []\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        },
+        {
+          "format": "csv",
+          "input_bytes": 262215,
+          "input_sha256": "b716ec6401f1aa5da7fe2501c5018d6f5a5b63d6e2004f5494f0ece4bb01bdd4",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": []
+          },
+          "checks": {
+            "exit_code": false,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": false,
+            "clean_stderr": false,
+            "issue_schema": false,
+            "record_count": false,
+            "issue_count": false,
+            "exact_issue_multiset": false
+          },
+          "actual_issues": [],
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "{\"error\": \"input_error\", \"message\": \"Cannot load B09.csv: field larger than field limit (131072)\"}\n",
+          "actual_error_type": "input_error",
+          "records_analyzed": null,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": false
+        }
+      ],
+      "parity_match": false,
+      "matched": false
+    },
+    {
+      "id": "B10",
+      "group": "boundary",
+      "category": "unsupported",
+      "title": "Script content is explicitly outside visible-text checks",
+      "rationale": "Both fragments contain unsupported script content; two notices are expected, and script numbers are not assessed.",
+      "classification": "documented_unsupported",
+      "parity_cohort": null,
+      "runs": [
+        {
+          "format": "json",
+          "input_bytes": 180,
+          "input_sha256": "1b6714451b376431b7209fb438edcbd1b42834db0dd91079bb679a1ffdabaa7a",
+          "expected_records": 1,
+          "expected": {
+            "exit_code": 0,
+            "error_type": null,
+            "issues": [
+              {
+                "record_index": 1,
+                "record_id": "script-profile",
+                "issue_type": "html_content_unverified",
+                "severity": "informational"
+              },
+              {
+                "record_index": 1,
+                "record_id": "script-profile",
+                "issue_type": "html_content_unverified",
+                "severity": "informational"
+              }
+            ]
+          },
+          "checks": {
+            "exit_code": true,
+            "no_traceback": true,
+            "structured_output": true,
+            "no_error": true,
+            "clean_stderr": true,
+            "issue_schema": true,
+            "record_count": true,
+            "issue_count": true,
+            "exact_issue_multiset": true
+          },
+          "actual_issues": [
+            {
+              "record_id": "script-profile",
+              "record_index": 1,
+              "issue_type": "html_content_unverified",
+              "description": "Source contains script/style content or a declaration outside the visible-text profile.",
+              "severity": "informational"
+            },
+            {
+              "record_id": "script-profile",
+              "record_index": 1,
+              "issue_type": "html_content_unverified",
+              "description": "Translation contains script/style content or a declaration outside the visible-text profile.",
+              "severity": "informational"
+            }
+          ],
+          "exit_code": 0,
+          "stdout": "{\n  \"mode\": \"translation_validation\",\n  \"engine_version\": \"0.5.0\",\n  \"input_file\": \"B10.json\",\n  \"input_format\": \"json\",\n  \"records_analyzed\": 1,\n  \"rules\": [\n    \"empty_translation\",\n    \"missing_translation\",\n    \"missing_placeholder\",\n    \"additional_placeholder\",\n    \"numerical_inconsistency\",\n    \"source_copied\",\n    \"html_tag_mismatch\",\n    \"missing_html_tag\",\n    \"unexpected_html_tag\",\n    \"html_structure_changed\",\n    \"html_content_unverified\",\n    \"placeholder_format_mismatch\",\n    \"placeholder_order_mismatch\",\n    \"invalid_record\",\n    \"missing_field\",\n    \"invalid_field\",\n    \"duplicate_record_id\",\n    \"duplicate_translation\",\n    \"suspicious_translation_reuse\",\n    \"placeholder_syntax_unverified\",\n    \"number_format_unverified\",\n    \"validation_error\"\n  ],\n  \"issue_count\": 2,\n  \"issues\": [\n    {\n      \"record_id\": \"script-profile\",\n      \"record_index\": 1,\n      \"issue_type\": \"html_content_unverified\",\n      \"description\": \"Source contains script/style content or a declaration outside the visible-text profile.\",\n      \"severity\": \"informational\"\n    },\n    {\n      \"record_id\": \"script-profile\",\n      \"record_index\": 1,\n      \"issue_type\": \"html_content_unverified\",\n      \"description\": \"Translation contains script/style content or a declaration outside the visible-text profile.\",\n      \"severity\": \"informational\"\n    }\n  ]\n}\n",
+          "stderr": "",
+          "actual_error_type": null,
+          "records_analyzed": 1,
+          "missing_events": [],
+          "unexpected_events": [],
+          "matched": true
+        }
+      ],
+      "parity_match": null,
+      "matched": true
+    }
+  ]
+}

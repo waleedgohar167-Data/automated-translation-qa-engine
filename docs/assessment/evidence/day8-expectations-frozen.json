@@ -1,0 +1,12 @@
+{
+  "fixture": "tests/fixtures/day8_adversarial.json",
+  "sha256": "847e74634d6ad48c49b43c72ca8b6d4b51d5840c6500c1f5e61946275f221597",
+  "frozen_at_utc": "2026-11-16T08:27:55.818248+00:00",
+  "status": "Defined before first evaluation run; no expected output read from engine results.",
+  "case_counts": {
+    "valid": 12,
+    "defective": 18,
+    "boundary": 10
+  },
+  "ordinary_parity_cases": 20
+}

@@ -1,0 +1,41 @@
+{
+  "cases": 40,
+  "case_matches": 38,
+  "case_mismatches": [
+    "B08",
+    "B09"
+  ],
+  "cli_executions": 61,
+  "cli_expectation_matches": 59,
+  "by_group": {
+    "valid": {
+      "cases": 12,
+      "matched": 12
+    },
+    "defective": {
+      "cases": 18,
+      "matched": 18
+    },
+    "boundary": {
+      "cases": 10,
+      "matched": 8
+    }
+  },
+  "valid_cases_with_unexpected_findings": 0,
+  "valid_cases_with_execution_or_contract_error": 0,
+  "defective_expected_events": 25,
+  "defective_matching_events": 25,
+  "defective_missing_events": 0,
+  "defective_unexpected_events": 0,
+  "parity": {
+    "ordinary": {
+      "cases": 20,
+      "consistent": 20
+    },
+    "long_field_boundary": {
+      "cases": 1,
+      "consistent": 0
+    }
+  }
+}
+Evidence saved to /workspace/scratch/3d8e4d0651a5/translation-qa-day8/docs/assessment/evidence/day8-evaluation-results.json
